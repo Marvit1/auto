@@ -6,6 +6,12 @@ declare const process: {
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
 
+
+  ssr: false, // Static site
+  app: {
+    baseURL: '/auto/' // GitHub repo անունը
+  },
+  // մնացած config-ը թողնեմ ինչպես կա
   devtools: { enabled: true },
 
   alias: {

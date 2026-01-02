@@ -91,7 +91,7 @@ const latestCars = computed(() =>
   padding: 120px 20px 80px;
   color: white;
   text-align: center;
-  background-image: url('../assets/jj.jpg');
+background-image: url('/images/jj.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
