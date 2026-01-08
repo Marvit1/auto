@@ -88,13 +88,12 @@
         <!-- Price Section -->
         <div class="price-section">
           <div class="price-label">{{ t('carDetail.priceLabel') }}</div>
-          <div class="price-value">{{ formatPrice(car.price) }}</div>
+<div class="price-value">${{ Math.floor(car.price).toLocaleString('en-US') }}</div>
         </div>
 
         <!-- Action Button -->
         <div class="action-section">
           <div class="view-details-btn">
-            <span>{{ resolveText('carDetail.viewDetails') }}</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
             </svg>
@@ -223,11 +222,28 @@ const formatPrice = (p) => {
 }
 
 const formatMileage = (mileage) => {
-  const unit = resolveText('carDetail.mileageUnit')
-  if (typeof mileage === "number") {
-    return `${new Intl.NumberFormat(localeMap[locale.value] || 'en-US').format(mileage)} ${unit}`
+  // Օգտագործիր props.car.mileageUnit-ը եթե կա
+  let unit = 'km'; // default
+  
+  if (props.car.mileageUnit) {
+    // Նորմալացրու mileageUnit-ը
+    unit = normalizeValue(props.car.mileageUnit);
+  } else {
+    // Fallback - փորձիր translation-ից վերցնել
+    try {
+      const translatedUnit = t('carDetail.mileageUnit');
+      if (translatedUnit && translatedUnit !== 'carDetail.mileageUnit') {
+        unit = translatedUnit;
+      }
+    } catch (e) {
+      // ignore
+    }
   }
-  return `${mileage} ${unit}`
+  
+  if (typeof mileage === "number") {
+    return `${new Intl.NumberFormat(localeMap[locale.value] || 'en-US').format(mileage)} ${unit}`;
+  }
+  return `${mileage} ${unit}`;
 }
 
 const getColorHex = (colorName) => {

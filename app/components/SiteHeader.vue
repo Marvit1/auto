@@ -412,7 +412,6 @@ onUnmounted(() => {
 .lang-switcher {
   display: flex;
   gap: 6px;
-  margin: 6px;
   padding: 6px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
@@ -448,7 +447,6 @@ onUnmounted(() => {
   font-size: 24px;
   line-height: 1;
   display: block;
-  
 }
 
 .lang-loading {
@@ -466,7 +464,6 @@ onUnmounted(() => {
   border-top-color: #4a90e2;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
-  
 }
 
 @keyframes spin {

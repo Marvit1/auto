@@ -20,6 +20,7 @@
         <div class="team-grid">
           <div class="team-member">
             <div class="member-image">
+              <img src="../assets/Vrd.jfif" 
      alt="Վարդան Դավթյան" 
      class="team-photo" 
      
@@ -45,6 +46,7 @@
 
           <div class="team-member">
             <div class="member-image">
+<img src="../assets/Art.jfif" 
      alt="Արտակ Ոսկանյան" 
      class="team-photo" 
    

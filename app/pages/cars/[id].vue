@@ -318,8 +318,13 @@ const getImageUrl = (img) => {
 }
 
 const formatPrice = (price) => {
-  if (!price) return '0'
-  return new Intl.NumberFormat('en-US').format(price)
+  if (!price) return '$0'
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price)
 }
 
 const formatMileage = (mileage) => {
