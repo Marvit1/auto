@@ -4,7 +4,7 @@ declare const process: {
 }
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: '2024-04-03',
 
   devtools: { enabled: true },
 
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     }
   },
 
-  // ✅ Built-in sitemap (ոչ մոդուլ)
+  // ✅ Built-in sitemap
   sitemap: {
     enabled: true,
     gzip: true,
@@ -77,5 +77,11 @@ export default defineNuxtConfig({
       redirectOn: 'root',
       alwaysRedirect: true
     }
+  },
+
+  // ✅ Render.com-ի համար օպտիմիզացիա
+  nitro: {
+    preset: 'node-server',
+    compressPublicAssets: true
   }
 })
