@@ -307,7 +307,7 @@ const getImageUrl = (img) => {
   if (typeof img === 'string') {
     // Եթե URL-ը հարաբերական է, ավելացրեք backend-ի հասցեն
     if (img.startsWith('/media/') || img.startsWith('media/')) {
-      return `http://127.0.0.1:8000${img.startsWith('/') ? img : '/' + img}`
+      return `https://autback.onrender.com${img.startsWith('/') ? img : '/' + img}`
     }
     return img
   }
