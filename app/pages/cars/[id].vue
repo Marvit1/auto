@@ -233,6 +233,7 @@ import { useI18n } from "vue-i18n"
 import { useLocalePath } from "#imports"
 import { useFetch } from "#imports"
 
+const defaultImage = '/aa.jpg'
 const route = useRoute()
 const id = route.params.id
 const i18nAll = useI18n({ useScope: 'global' })
@@ -292,7 +293,7 @@ const hasMultipleImages = computed(() => {
 
 const currentImage = computed(() => {
   if (!car.value?.images || car.value.images.length === 0) {
-    return '/placeholder-car.jpg'
+    return defaultImage
   }
   return getImageUrl(car.value.images[currentImageIndex.value]?.image)
 })
@@ -301,11 +302,9 @@ const currentImage = computed(() => {
 const normalizeValue = (v) => {
   return extractText(v, locale.value)
 }
-
 const getImageUrl = (img) => {
-  if (!img) return '/placeholder-car.jpg'
+  if (!img) return defaultImage
   if (typeof img === 'string') {
-    // Եթե URL-ը հարաբերական է, ավելացրեք backend-ի հասցեն
     if (img.startsWith('/media/') || img.startsWith('media/')) {
       return `https://autback.onrender.com${img.startsWith('/') ? img : '/' + img}`
     }
@@ -314,7 +313,7 @@ const getImageUrl = (img) => {
   if (img.url) return img.url
   if (img.src) return img.src
   if (img.image) return getImageUrl(img.image)
-  return '/placeholder-car.jpg'
+  return defaultImage
 }
 
 const formatPrice = (price) => {
