@@ -244,7 +244,7 @@ const currentImageIndex = ref(0)
 const lightboxOpen = ref(false)
 
 // ✅ Փոխեք այս տողը - օգտագործեք ձեր backend-ի իրական URL-ը
-const { data: car, pending: isPending, refresh } = useFetch(`http://127.0.0.1:8000/api/cars/${id}/`, {
+const { data: car, pending: isPending, refresh } = useFetch(`https://autback.onrender.com/api/cars/${id}/`, {
   query: { lang: locale },
   key: `car-${id}-${locale.value}`,
   server: false

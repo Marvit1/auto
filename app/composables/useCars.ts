@@ -80,7 +80,7 @@ export const useCars = () => {
     loading.value = true
     error.value = null
     try {
-      const { data } = await useFetch<any[]>('http://127.0.0.1:8000/api/cars/', {
+      const { data } = await useFetch<any[]>('https://autback.onrender.com/api/cars/', {
         query: { lang: locale.value }
       })
       if (data.value) {

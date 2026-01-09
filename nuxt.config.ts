@@ -26,6 +26,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+      apiBase: process.env.API_BASE_URL || 'https://autback.onrender.com',
+
       siteName: process.env.SITE_NAME || 'AutoWeb',
       defaultOgImage: '/images/hero-bg.jpg'
     }
