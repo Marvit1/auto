@@ -32,7 +32,7 @@
              <!-- Team Member: David -->
 <div class="team-member">
   <div class="member-image">
-    <img src="../assets/David.jfif" 
+    <img src="../assets/Davo.jfif" 
          alt="Դավիթ Ոսկանյան" 
          class="team-photo" />
   </div>
