@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'AutoWeb -  ավտոմեքենաների խանութ',
-      titleTemplate: '%s · AutoWeb',
+      titleTemplate: '%s · AutoSwift',
       link: [
         {
           rel: 'icon',
