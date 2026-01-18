@@ -49,7 +49,7 @@ export default defineNuxtConfig({
         {
           rel: 'icon',
           type: 'image/jpeg',
-          href: '/aa.jfif'
+          href: '/aa.jpg'
         }
       ],
       meta: [
