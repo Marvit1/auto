@@ -66,8 +66,8 @@
       <div class="container">
         <div class="about-grid">
           <div class="about-text">
-            <span class="section-badge">Ինչու մեր վրա</span>
-            <h2>Ինչու եք ընտրել մեզ</h2>
+            <span class="section-badge">Ինչու ընտրել մեզ </span>
+            <h2>Ինչու  ընտրել մեզ</h2>
             <p>Մենք մեծ փորձ ունենք այս ոլորտում և պատրաստ ենք ձեզ լավագույն ծառայությունը տրամադրել:</p>
             
             <div class="features">
@@ -82,8 +82,7 @@
               <div class="feature-item">
                 <div class="feature-icon">👥</div>
                 <div>
-                  <h4>Հազարավոր հաճախորդներ</h4>
-                  <p>Բավարար հաճախորդների լիքերի համար</p>
+                  <h4>Բազմաթիվ գոհ հաճախորդներ</h4>
                 </div>
               </div>
               

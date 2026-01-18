@@ -1373,7 +1373,7 @@ const calculate = () => {
 
 .calculator-wrapper {
   min-height: 100vh;
-  background-image: url('../assets/ii.jpg');
+  background-image: url('../assets/jj.jpg');
   padding: 40px 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
