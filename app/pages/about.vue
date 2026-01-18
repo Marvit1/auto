@@ -167,10 +167,10 @@
           <p>{{ $t('about.ctaSubtitle') }}</p>
           <div class="cta-buttons">
             <a href="tel:+37493033883" class="cta-button primary">
-              📞 {{ $t('about.callBtn') }}
+              📞 <h4>+374 93 033 883</h4>
             </a>
             <a href="mailto:Vardandavtyan478@gmail.com" class="cta-button secondary">
-              ✉️ {{ $t('about.emailBtn') }}
+              ✉️ <h4>Vardandavtyan478@gmail.com</h4>
             </a>
           </div>
         </div>
