@@ -66,7 +66,7 @@ export const useCars = () => {
       year: raw.year || 0,
       price: raw.price || 0,
       mileage: raw.mileage || 0,
-      mileageUnit: extractText(raw.mileageUnit, lang) || 'կմ',
+      mileageUnit: extractText(raw.mileageUnit, lang) || 'miles',
       color: extractText(raw.color, lang) || '',
       fuel: extractText(raw.fuel, lang) || '',
       transmission: extractText(raw.transmission, lang) || '',

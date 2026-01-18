@@ -220,7 +220,7 @@ const formatMileage = (mileage) => {
   } else {
     // Fallback - փորձիր translation-ից վերցնել
     try {
-      const translatedUnit = ('carDetail.mileageUnit');
+      const translatedUnit = t('carDetail.mileageUnit');
       if (translatedUnit && translatedUnit !== 'carDetail.mileageUnit') {
         unit = translatedUnit;
       }
