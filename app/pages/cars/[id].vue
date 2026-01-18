@@ -88,7 +88,7 @@
 
               <div class="price-section">
                 <div class="price-label">{{ t('carDetail.priceLabel') }}</div>
-                <div class="price-value">{{ formatPrice(car.price) }} $</div>
+                <div class="price-value">{{ formatPrice(car.price) }} </div>
               </div>
 
               <div class="quick-specs">
@@ -324,11 +324,11 @@ const formatPrice = (price) => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   }).format(price)
-}
+} 
 
 const formatMileage = (mileage) => {
-  if (!mileage) return '0 km'
-  return `${new Intl.NumberFormat('en-US').format(mileage)} km`
+  if (!mileage) return '0 miles'
+  return `${new Intl.NumberFormat('en-US').format(mileage)} miles`
 }
 
 const getColorHex = (colorName) => {

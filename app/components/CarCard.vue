@@ -61,9 +61,7 @@
           </div>
 
           <div class="spec-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          
             <span>{{ normalizeValue(car.fuel) }}</span>
           </div>
 
@@ -79,7 +77,7 @@
         <!-- Price Section -->
         <div class="price-section">
           <div class="price-label">{{ t('carDetail.priceLabel') }}</div>
-<div class="price-value">${{ Math.floor(car.price).toLocaleString('en-US') }}</div>
+<div class="price-value">{{ Math.floor(car.price).toLocaleString('en-US') }}$</div>
         </div>
 
         <!-- Action Button -->
@@ -214,7 +212,7 @@ const formatPrice = (p) => {
 
 const formatMileage = (mileage) => {
   // Օգտագործիր props.car.mileageUnit-ը եթե կա
-  let unit = 'km'; // default
+  let unit = 'miles'; // default
   
   if (props.car.mileageUnit) {
     // Նորմալացրու mileageUnit-ը
