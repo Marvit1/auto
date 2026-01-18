@@ -8,10 +8,7 @@
         <div class="footer-brand">
           <div class="brand-logo">
             
-          <div class="brand-text">
-            <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
-            <span class="brand-tagline">{{ t('footer.tagline') }}</span>
-          </div>
+          
           </div>
         </div>
       </NuxtLink>
