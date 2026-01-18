@@ -4,13 +4,21 @@
       <!-- Logo Section -->
       <NuxtLink to="/" class="logo-section">
         <div class="logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M5 17h14v2H5v-2zm7-11c3.53 0 6.43 2.61 6.92 6H5.08c.49-3.39 3.39-6 6.92-6M19 9c-.5-4.42-4.25-8-9-8S1.5 4.58 1 9h18zm-7 3l-2.5 4h5L12 12z" fill="currentColor"/>
-          </svg>
+          
         </div>
-        <div class="logo-text">
-          <span class="logo-main">Auto</span>
-          <span class="logo-sub">Swift</span>
+        <!-- Brand Section -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M5 17h14v2H5v-2zm7-11c3.53 0 6.43 2.61 6.92 6H5.08c.49-3.39 3.39-6 6.92-6M19 9c-.5-4.42-4.25-8-9-8S1.5 4.58 1 9h18zm-7 3l-2.5 4h5L12 12z" fill="currentColor"/>
+              </svg>
+            </div>
+          <div class="brand-text">
+            <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
+            <span class="brand-tagline">{{ t('footer.tagline') }}</span>
+          </div>
+          </div>
         </div>
       </NuxtLink>
 
@@ -280,6 +288,15 @@ onUnmounted(() => {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+
+  width: 48px;        /* փոխիր ըստ կարիքի */
+  height: 48px;
+
+  background-image: url('../assets/logo.jfif');
+  background-size: contain;   /* լոգոն ամբողջությամբ երևա */
+  background-repeat: no-repeat;
+  background-position: center;
+
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
@@ -690,6 +707,38 @@ onUnmounted(() => {
     width: 20px;
     height: 20px;
   }
+
+  .brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+}
+
+.brand-market {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tagline {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  font-weight: 500;
+}
+
+.brand-description {
+  color: #cbd5e0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+}
 }
 
 @media (max-width: 400px) {

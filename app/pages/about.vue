@@ -41,10 +41,10 @@
           </div>
 
 
-            <!-- Team Member  -->
+            <!-- Team Member  3-->
           <div class="team-member">
             <div class="member-image">
-              <img src="../assets/Davo.jfif" alt="Վարդան Դավթյան" class="team-photo" />
+              <img src="../assets/Davo.jfif" alt=" Դավիթ Ոսկանյան" class="team-photo" />
               <div v-if="!imageLoaded" class="image-placeholder"></div>
             </div>
             <div class="member-info">
@@ -80,6 +80,9 @@
         </div>
       </div>
     </section>
+
+
+
 
     <!-- About Content -->
     <section class="about-content">
@@ -172,6 +175,214 @@
                 📞 Զանգել
               </a>
               
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+
+
+<template>
+  <div class="about-page">
+    <section class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge">{{ t('about.badge') }}</span>
+          <p class="hero-subtitle">{{ t('about.subtitle') }}</p>
+        </div>
+      </div>
+    </section>
+<section class="team-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">{{ t('about.teamBadge') }}</span>
+          <h2>{{ t('about.teamTitle') }}</h2>
+          <p>{{ t('about.teamSubtitle') }}</p>
+        </div>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-image">
+              <img src="../assets/Vrd.jfif" 
+     alt="Վարդան Դավթյան" 
+     class="team-photo" 
+     
+     />
+     
+             <!-- Team Member: David -->
+<div class="team-member">
+  <div class="member-image">
+    <img src="../assets/David.jfif" 
+         alt="Դավիթ Ոսկանյան" 
+         class="team-photo" />
+  </div>
+  <div class="member-info">
+    <h3>{{ t('about.davidName') }}</h3>
+    <p class="member-role">{{ t('about.davidRole') }}</p>
+    <div class="member-contacts">
+      <a href="tel:+37433828268" class="contact-link">
+        📞 +374 33 828 268
+      </a>
+      <a href="mailto:Davdvoskanyan@gmail.com" class="contact-link">
+        ✉️ Davdvoskanyan@gmail.com
+      </a>
+    </div>
+  </div>
+</div>
+            </div>
+            <div class="member-info">
+              <h3>{{ t('about.vardaName') }}</h3>
+              <p class="member-role">{{ t('about.vardaRole') }}</p>
+              <div class="member-contacts">
+                <a href="tel:+37493033883" class="contact-link">
+                  📞 +374 93 033 883
+                </a>
+                <a href="Vardandavtyan478@gmail.com" class="contact-link">
+                 ✉️ Vardandavtyan478@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+           <!-- Team Member  3-->
+          
+
+          <div class="team-member">
+            <div class="member-image">
+<img src="../assets/Art.jfif" 
+     alt="Արտակ Վոսկանյան" 
+     class="team-photo" 
+   
+     />              <div class="image-placeholder">
+               
+              </div>
+            </div>
+            <div class="member-info">
+              <h3>{{ t('about.artakName') }}</h3>
+              <p class="member-role">{{ t('about.artakRole') }}</p>
+              <div class="member-contacts">
+                <a href="tel:+37455692222" class="contact-link">
+                  📞 +374 55 692 222
+                </a>
+                <a href="" class="contact-link">
+                 
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-content">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <span class="section-badge">{{ t('about.whyBadge') }}</span>
+            <h2>{{ t('about.whyTitle') }}</h2>
+            <p>{{ t('about.whyText') }}</p>
+            
+            <div class="features">
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div>
+                  <h4>{{ t('about.featExperience') }}</h4>
+                  <p></p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <div>
+                  <h4>{{ t('about.featCustomers') }}</h4>
+                  <p></p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">💬</div>
+                <div>
+                  <h4>{{ t('about.featAdvice') }}</h4>
+                  <p>{{ t('about.featAdviceDesc') }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="about-image">
+            <div class="image-wrapper">
+              <img src="../assets/logo.jfif" alt="Մեր ցուցասրահը" class="main-image" />
+              <div class="">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-card">
+          <div class="contact-header">
+            <div class="contact-icon">💬</div>
+            <h2>{{ t('about.contactTitle') }}</h2>
+            <p>{{ t('about.contactSubtitle') }}</p>
+          </div>
+          
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="contact-item-icon">📞</div>
+              <div class="contact-item-content">
+                <h4>{{ t('footer.phone') }}</h4>
+                <a href="tel:+37493033883">+374 93 033 883</a>
+                <a href="tel:+37455692222">+374 55 692 222</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">✉️</div>
+              <div class="contact-item-content">
+                <h4>{{ t('footer.email') }}</h4>
+                <a href="Vardandavtyan478@gmail.com">Vardandavtyan478@gmail.com</a>
+                
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">📍</div>
+              <div class="contact-item-content">
+                <h4>{{ t('footer.address') }}</h4>
+                <p>{{ t('about.addressCity') }}</p>
+                <p>{{ t('about.addressCountry') }}</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">🕒</div>
+              <div class="contact-item-content">
+                <h4>{{ t('about.workHours') }}</h4>
+                <p>{{ t('about.workHours') }}</p>
+                <p>{{ t('about.workHoursSat') }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <h3>{{ t('about.ctaReady') }}</h3>
+            <p>{{ t('about.ctaSub') }}</p>
+            <div class="cta-buttons">
+              <a href="tel:+37491234567" class="cta-button primary">
+                📞 {{ t('about.call') }}
+              </a>
+              <a href="mailto:info@cars.am" class="cta-button secondary">
+                ✉️ {{ t('about.emailUs') }}
+              </a>
             </div>
           </div>
         </div>

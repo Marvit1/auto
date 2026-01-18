@@ -6,17 +6,17 @@
         <h1 class="page-title">{{ t('hero.title') }}</h1>
         <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
         
-        <!-- Hero Search Bar -->
+        <!-- Hero Search Bar 
         <div class="hero-search">
           
-          <!-- Quick Filters 
+           Quick Filters 
           <div class="quick-filters">
             <button class="quick-filter">{{ t('hero.quickAbout') }}</button>
             <button class="quick-filter">{{ t('hero.quickServices') }}</button>
             <button class="quick-filter">{{ t('hero.quickCars') }}</button>
             <button class="quick-filter">{{ t('hero.quickHome') }}</button>
-          </div> -->
-        </div>
+          </div> 
+        </div>-->
         
          <!-- Quick Stats -->
        

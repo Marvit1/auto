@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   // ✅ Nuxt 4 SEO base
   site: {
     url: process.env.BASE_URL || 'http://localhost:3000',
-    name: process.env.SITE_NAME || 'AutoWeb'
+    name: process.env.SITE_NAME || 'AutoSwift'
   },
 
   runtimeConfig: {
@@ -28,8 +28,9 @@ export default defineNuxtConfig({
       baseUrl: process.env.BASE_URL || 'http://localhost:3000',
       apiBase: process.env.API_BASE_URL || 'https://autback.onrender.com',
 
-      siteName: process.env.SITE_NAME || 'AutoWeb',
-      defaultOgImage: '/images/hero-bg.jpg'
+      siteName: process.env.SITE_NAME || 'AutoSwift',
+      defaultOgImage: '/images/og-image.jpg',
+      logoUrl: '/logo.jfif'
     }
   },
 
@@ -42,8 +43,15 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'AutoWeb - Ուղիղ ավտոմեքենաների խանութ',
+      title: 'AutoWeb -  ավտոմեքենաների խանութ',
       titleTemplate: '%s · AutoWeb',
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/jpeg',
+          href: '/logo.jfif'
+        }
+      ],
       meta: [
         { name: 'theme-color', content: '#667eea' },
         {
@@ -54,7 +62,30 @@ export default defineNuxtConfig({
           property: 'og:site_name',
           content: process.env.SITE_NAME || 'AutoWeb'
         },
-        { name: 'twitter:card', content: 'summary_large_image' }
+        {
+          property: 'og:image',
+          content: '/images/og-image.jpg'
+        },
+        {
+          property: 'og:image:width',
+          content: '1200'
+        },
+        {
+          property: 'og:image:height',
+          content: '630'
+        },
+        {
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:image',
+          content: '/images/og-image.jpg'
+        }
       ]
     }
   },
