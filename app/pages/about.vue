@@ -16,7 +16,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-badge">Թիմ</span>
-          <h2>Մեր պրոֆեսիոնալ թիմн</h2>
+          <h2>Մեր պրոֆեսիոնալ թիմը</h2>
         </div>
         
         <div class="team-grid">
@@ -89,7 +89,6 @@
                 <div class="feature-icon">💬</div>
                 <div>
                   <h4>24/7 Խորհրդատվություն</h4>
-                  <p>Մենք միշտ ձեղի կողքին ենք</p>
                 </div>
               </div>
             </div>
