@@ -51,17 +51,12 @@
         <!-- Specs Grid -->
         <div class="specs-grid">
           <div class="spec-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="12" cy="12" r="10" stroke-width="2"/>
-              <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            
             <span>{{ formatMileage(car.mileage) }}</span>
           </div>
 
           <div class="spec-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M7 7h10M7 12h10M7 17h6" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            
             <span>{{ normalizeValue(car.transmission) }}</span>
           </div>
 
