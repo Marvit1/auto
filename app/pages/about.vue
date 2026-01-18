@@ -162,18 +162,7 @@
           </div>
         </div>
 
-        <div class="cta-section">
-          <h3>{{ $t('about.ctaTitle') }}</h3>
-          <p>{{ $t('about.ctaSubtitle') }}</p>
-          <div class="cta-buttons">
-            <a href="tel:+37493033883" class="cta-button primary">
-              📞 <h4>+374 93 033 883</h4>
-            </a>
-            <a href="mailto:Vardandavtyan478@gmail.com" class="cta-button secondary">
-              ✉️ <h4>Vardandavtyan478@gmail.com</h4>
-            </a>
-          </div>
-        </div>
+       
       </div>
     </section>
   </div>
