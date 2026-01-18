@@ -8,7 +8,9 @@
         <div class="footer-brand">
           <div class="brand-logo">
             
-          
+          <div class="brand-text">
+           
+          </div>
           </div>
         </div>
       </NuxtLink>
