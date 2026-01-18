@@ -16,7 +16,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-badge">Թիմ</span>
-          <h2>Մեր պրոֆեսիոնալ թիմ</h2>
+          <h2>Մեր պրոֆեսիոնալ թիմн</h2>
         </div>
         
         <div class="team-grid">
