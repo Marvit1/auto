@@ -246,7 +246,7 @@ const latestCars = computed(() =>
 .featured-section {
   width: 100%;
   padding: 60px 0;
-  background-image: url('../assets/ii.jpg');
+  background-image: url('../assets/jj.jpg');
 }
 
 .featured-section h2 {
