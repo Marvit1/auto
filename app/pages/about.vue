@@ -30,7 +30,7 @@
             <div class="member-info">
               <h3>{{ $t('about.vardaName') }}</h3>
               <p class="member-role">{{ $t('about.vardaRole') }}</p>
-              <p class="member-bio">{{ $t('about.vardaBio') }}</p>
+             <p class="member-bio">{{ $t('about.vardaBio') }}</p> 
               <div class="member-contacts">
                 <a href="tel:+37493033883" class="contact-link">
                   <span class="contact-icon">📞</span>
@@ -52,7 +52,7 @@
             <div class="member-info">
               <h3>{{ $t('about.artakName') }}</h3>
               <p class="member-role">{{ $t('about.artakRole') }}</p>
-              <p class="member-bio">{{ $t('about.artakBio') }}</p>
+             <p class="member-bio">{{ $t('about.artakBio') }}</p> 
               <div class="member-contacts">
                 <a href="tel:+37455692222" class="contact-link">
                   <span class="contact-icon">📞</span>
@@ -60,7 +60,7 @@
                 </a>
                 <a href="mailto:artak@example.com" class="contact-link">
                   <span class="contact-icon">✉️</span>
-                  <span>artak@example.com</span>
+                  <span>rtkvoskanyan@gmail.com</span>
                 </a>
               </div>
             </div>
@@ -74,7 +74,7 @@
             <div class="member-info">
               <h3>{{ $t('about.davidName') }}</h3>
               <p class="member-role">{{ $t('about.davidRole') }}</p>
-              <p class="member-bio">{{ $t('about.davidBio') }}</p>
+             <p class="member-bio">{{ $t('about.davidBio') }}</p>
               <div class="member-contacts">
                 <a href="tel:+37433828268" class="contact-link">
                   <span class="contact-icon">📞</span>
