@@ -29,8 +29,8 @@ export default defineNuxtConfig({
       apiBase: process.env.API_BASE_URL || 'https://autback.onrender.com',
 
       siteName: process.env.SITE_NAME || 'AutoSwift',
-      defaultOgImage: '../assets/logo.jfif',
-      logoUrl: '../assets/logo.jfif'
+      defaultOgImage: '/images/og-image.jpg', 
+      logoUrl: '/dd.jfif'
     }
   },
 
