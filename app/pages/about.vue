@@ -40,6 +40,27 @@
             </div>
           </div>
 
+
+            <!-- Team Member  -->
+          <div class="team-member">
+            <div class="member-image">
+              <img src="../assets/Davo.jfif" alt="Վարդան Դավթյան" class="team-photo" />
+              <div v-if="!imageLoaded" class="image-placeholder"></div>
+            </div>
+            <div class="member-info">
+              <h3>Դավիթ Ոսկանյան</h3>
+              <p class="member-role">Վաճառքի մասնագետ</p>
+              <div class="member-contacts">
+                <a href="tel:+37493033883" class="contact-link">
+                  📞 +374 33828268
+                </a>
+                <a href="mailto:Vardandavtyan478@gmail.com" class="contact-link">
+                  ✉️ Davdvoskanyan@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+
           <!-- Team Member 2 -->
           <div class="team-member">
             <div class="member-image">
