@@ -6,7 +6,7 @@
       <div class="container">
         <div class="hero-content">
           <span class="hero-badge">{{ $t('about.badge') }}</span>
-          <h1 class="hero-title">{{ $t('about.title') }}</h1>
+         <!-- <h1 class="hero-title">{{ $t('about.title') }}</h1> -->
           <p class="hero-subtitle">{{ $t('about.subtitle') }}</p>
         </div>
       </div>
@@ -91,7 +91,7 @@
       </div>
     </section>
 
-    <!-- Statistics Section -->
+    <!-- Statistics Section 
     <section class="stats-section">
       <div class="container">
         <div class="stats-grid">
@@ -113,13 +113,13 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
     <!-- Contact Section -->
     <section class="contact-section">
       <div class="container">
         <div class="section-header">
-          <span class="section-badge">{{ $t('about.contactBadge') }}</span>
+         <!--<span class="section-badge">{{ $t('about.contactBadge') }}</span>-->
           <h2>{{ $t('about.contactTitle') }}</h2>
           <p>{{ $t('about.contactSubtitle') }}</p>
         </div>
@@ -128,7 +128,7 @@
           <div class="contact-item">
             <div class="contact-item-icon">📞</div>
             <div class="contact-item-content">
-              <h4>{{ $t('about.phone') }}</h4>
+              <!--<h4>{{ $t('about.phone') }}</h4>-->
               <a href="tel:+37493033883">+374 93 033 883</a>
               <a href="tel:+37455692222">+374 55 692 222</a>
               <a href="tel:+37433828268">+374 33 828 268</a>
@@ -138,7 +138,7 @@
           <div class="contact-item">
             <div class="contact-item-icon">✉️</div>
             <div class="contact-item-content">
-              <h4>{{ $t('about.email') }}</h4>
+              <!--<h4>{{ $t('about.email') }}</h4>-->
               <a href="mailto:Vardandavtyan478@gmail.com">Vardandavtyan478@gmail.com</a>
             </div>
           </div>
@@ -146,16 +146,18 @@
           <div class="contact-item">
             <div class="contact-item-icon">📍</div>
             <div class="contact-item-content">
-              <h4>{{ $t('about.address') }}</h4>
-              <p>{{ $t('about.addressFull') }}</p>
+              <!--<h4>{{ $t('about.address') }}</h4>-->
+              <h4>Երևան, Խանզադյան 8/2</h4>
+              <!--<p>{{ $t('about.addressFull') }}</p>-->
             </div>
           </div>
 
           <div class="contact-item">
             <div class="contact-item-icon">🕒</div>
             <div class="contact-item-content">
-              <h4>{{ $t('about.hours') }}</h4>
-              <p>{{ $t('about.hoursText') }}</p>
+              <!--<h4>{{ $t('about.hours') }}</h4>-->
+              <h4>Երկուշաբթի - կիրակի | 11:00 - 24:00</h4>
+              <!--<p>{{ $t('about.hoursText') }}</p>-->
             </div>
           </div>
         </div>
