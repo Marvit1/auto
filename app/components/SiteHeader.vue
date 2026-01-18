@@ -282,8 +282,8 @@ onUnmounted(() => {
   gap: 12px;
   text-decoration: none;
 
-  width: 56px;        /* փոխիր ըստ կարիքի */
-  height: 56px;
+  width: 62px;        /* փոխիր ըստ կարիքի */
+  height: 62px;
 
   background-image: url('../assets/logo.jfif');
   background-size: contain;   /* լոգոն ամբողջությամբ երևա */
