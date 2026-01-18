@@ -6,7 +6,7 @@
       <div class="container">
         <div class="hero-content">
           <span class="hero-badge">Մեր մասին</span>
-          <p class="hero-subtitle">Թվային ժամանակի ամենալավ ծառայությունները</p>
+         
         </div>
       </div>
     </section>
@@ -25,11 +25,11 @@
           <div class="team-member">
             <div class="member-image">
               <img src="../assets/Vrd.jfif" alt="Վարդան Դավթյան" class="team-photo" />
-              <div v-if="!imageLoaded" class="image-placeholder">📷</div>
+              <div v-if="!imageLoaded" class="image-placeholder"></div>
             </div>
             <div class="member-info">
               <h3>Վարդան Դավթյան</h3>
-              <p class="member-role">Հիմնադիր & Ղեկավար</p>
+              <p class="member-role">Հիմնադիր, Ղեկավար</p>
               <div class="member-contacts">
                 <a href="tel:+37493033883" class="contact-link">
                   📞 +374 93 033 883
@@ -45,7 +45,7 @@
           <div class="team-member">
             <div class="member-image">
               <img src="../assets/Art.jfif" alt="Արտակ Վոսկանյան" class="team-photo" />
-              <div v-if="!imageLoaded" class="image-placeholder">📷</div>
+              <div v-if="!imageLoaded" class="image-placeholder"></div>
             </div>
             <div class="member-info">
               <h3>Արտակ Ոսկանյան</h3>
@@ -140,7 +140,7 @@
             <div class="contact-item">
               <div class="contact-item-icon">🕒</div>
               <div class="contact-item-content">
-                <h4>Աշխատավճար ժամեր</h4>
+                <h4>Աշխատանքային ժամեր</h4>
                 <p>Երկ-Կիր: 11:00-24:00</p>
                 
               </div>
@@ -148,15 +148,12 @@
           </div>
 
           <div class="cta-section">
-            <h3>Գոտի կապի մեջ մտեք</h3>
-            <p>Մենք նյութական և ցանկ հետ պատասխանել ենք</p>
+           
             <div class="cta-buttons">
               <a href="tel:+37493033883" class="cta-button primary">
                 📞 Զանգել
               </a>
-              <a href="mailto:Vardandavtyan478@gmail.com" class="cta-button secondary">
-                ✉️ Գրել
-              </a>
+              
             </div>
           </div>
         </div>
@@ -313,7 +310,8 @@ const imageLoaded = ref(false)
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  height: 250px;
+  height: 200px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;

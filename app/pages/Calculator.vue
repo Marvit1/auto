@@ -537,7 +537,7 @@ const calculate = () => {
             />
           </div>
           
-          <div class="form-group">
+         <div class="form-group">
             <label class="form-label" for="auction">{{ t('auctionLabel') }}</label>
             <select id="auction" v-model="values.auction" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
@@ -549,17 +549,662 @@ const calculate = () => {
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="auctionLocation">{{ t('calculator.auctionLocation') }}</label>
-            <select id="auctionLocation" v-model="values.auctionLocation" class="form-field">
-              <option value="">{{ t('calculator.select') }}</option>
-              <option>AL-BIRMINGHAM</option>
-              <option>AL-DOTHAN</option>
-              <option>CA-LOS ANGELES</option>
-              <option>TX-HOUSTON</option>
-              <option>FL-MIAMI</option>
-              <option>NY-NEW YORK</option>
-            </select>
-          </div>
+  <label class="form-label" for="auctionLocation">{{ t('calculator.auctionLocation') }}</label>
+  <select id="auctionLocation" v-model="values.auctionLocation" class="form-field">
+    <option value="">{{ t('calculator.select') }}</option>
+    
+    <!-- COPART LOCATIONS -->
+    <optgroup label="Copart - Alabama">
+      <option>Copart AL - Tanner</option>
+      <option>Copart AL - Montgomery</option>
+      <option>Copart AL - Birmingham</option>
+      <option>Copart AL - Mobile</option>
+      <option>Copart AL - Dothan</option>
+      <option>Copart AL - Mobile South</option>
+    </optgroup>
+
+    <optgroup label="Copart - Arkansas">
+      <option>Copart AR - Fayetteville</option>
+      <option>Copart AR - Little Rock</option>
+    </optgroup>
+
+    <optgroup label="Copart - Arizona">
+      <option>Copart AZ - Tucson</option>
+      <option>Copart AZ - Phoenix</option>
+      <option>Copart AZ - Phoenix North</option>
+    </optgroup>
+
+    <optgroup label="Copart - California">
+      <option>Copart CA - Antelope</option>
+      <option>Copart CA - Long Beach</option>
+      <option>Copart CA - Sun Valley</option>
+      <option>Copart CA - Van Nuys</option>
+      <option>Copart CA - Vallejo</option>
+      <option>Copart CA - San Jose</option>
+      <option>Copart CA - San Diego</option>
+      <option>Copart CA - Sacramento</option>
+      <option>Copart CA - Rancho Cucamonga</option>
+      <option>Copart CA - Martinez</option>
+      <option>Copart CA - Los Angeles</option>
+      <option>Copart CA - Hayward</option>
+      <option>Copart CA - Fresno</option>
+      <option>Copart CA - San Bernardino</option>
+      <option>Copart CA - Bakersfield</option>
+      <option>Copart CA - Redding</option>
+      <option>Copart CA - Adelanto</option>
+      <option>Copart CA - Mentone</option>
+      <option>Copart CA - So Sacramento</option>
+      <option>Copart CA - Napa</option>
+    </optgroup>
+
+    <optgroup label="Copart - Colorado">
+      <option>Copart CO - Denver</option>
+      <option>Copart CO - Denver South</option>
+      <option>Copart CO - Colorado Springs</option>
+      <option>Copart CO - Denver Central</option>
+    </optgroup>
+
+    <optgroup label="Copart - Connecticut">
+      <option>Copart CT - Hartford Springfield</option>
+      <option>Copart CT - Hartford</option>
+    </optgroup>
+
+    <optgroup label="Copart - Delaware">
+      <option>Copart DE - Seaford</option>
+    </optgroup>
+
+    <optgroup label="Copart - Florida">
+      <option>Copart FL - Orlando North</option>
+      <option>Copart FL - Miami Central</option>
+      <option>Copart FL - West Palm Beach</option>
+      <option>Copart FL - Tampa South</option>
+      <option>Copart FL - Miami North</option>
+      <option>Copart FL - Orlando South</option>
+      <option>Copart FL - Ocala</option>
+      <option>Copart FL - Tallahassee</option>
+      <option>Copart FL - Miami South</option>
+      <option>Copart FL - Ft. Pierce</option>
+      <option>Copart FL - Punta Gorda South</option>
+      <option>Copart FL - Jacksonville North</option>
+    </optgroup>
+
+    <optgroup label="Copart - Georgia">
+      <option>Copart GA - Macon</option>
+      <option>Copart GA - Cartersville</option>
+      <option>Copart GA - Tifton</option>
+      <option>Copart GA - Savannah</option>
+      <option>Copart GA - Atlanta East</option>
+      <option>Copart GA - Atlanta North</option>
+      <option>Copart GA - Atlanta South</option>
+      <option>Copart GA - Atlanta West</option>
+      <option>Copart GA - Fairburn</option>
+      <option>Copart GA - Augusta</option>
+    </optgroup>
+
+    <optgroup label="Copart - Hawaii">
+      <option>Copart HI - Honolulu</option>
+    </optgroup>
+
+    <optgroup label="Copart - Iowa">
+      <option>Copart IA - Des Moines</option>
+      <option>Copart IA - Davenport</option>
+    </optgroup>
+
+    <optgroup label="Copart - Idaho">
+      <option>Copart ID - Boise</option>
+    </optgroup>
+
+    <optgroup label="Copart - Illinois">
+      <option>Copart IL - Wheeling</option>
+      <option>Copart IL - Peoria</option>
+      <option>Copart IL - Chicago North</option>
+      <option>Copart IL - Chicago South</option>
+      <option>Copart IL - Southern Illinois</option>
+    </optgroup>
+
+    <optgroup label="Copart - Indiana">
+      <option>Copart IN - Indianapolis</option>
+      <option>Copart IN - Fort Wayne</option>
+      <option>Copart IN - Cicero</option>
+      <option>Copart IN - Dyer</option>
+    </optgroup>
+
+    <optgroup label="Copart - Kansas">
+      <option>Copart KS - Wichita</option>
+      <option>Copart KS - Kansas City</option>
+    </optgroup>
+
+    <optgroup label="Copart - Kentucky">
+      <option>Copart KY - Lexington West</option>
+      <option>Copart KY - Walton</option>
+      <option>Copart KY - Louisville</option>
+      <option>Copart KY - Lexington East</option>
+      <option>Copart KY - Earlington</option>
+    </optgroup>
+
+    <optgroup label="Copart - Louisiana">
+      <option>Copart LA - Shreveport</option>
+      <option>Copart LA - New Orleans</option>
+      <option>Copart LA - Baton Rouge</option>
+    </optgroup>
+
+    <optgroup label="Copart - Massachusetts">
+      <option>Copart MA - West Warren</option>
+      <option>Copart MA - North Boston</option>
+      <option>Copart MA - South Boston</option>
+      <option>Copart MA - Freetown</option>
+    </optgroup>
+
+    <optgroup label="Copart - Washington DC & Maryland">
+      <option>Copart DC - Washington DC</option>
+      <option>Copart MD - Baltimore</option>
+      <option>Copart MD - Baltimore East</option>
+    </optgroup>
+
+    <optgroup label="Copart - Maine">
+      <option>Copart ME - Lyman</option>
+      <option>Copart ME - Windham</option>
+    </optgroup>
+
+    <optgroup label="Copart - Michigan">
+      <option>Copart MI - Detroit</option>
+      <option>Copart MI - Ionia</option>
+      <option>Copart MI - Lansing</option>
+      <option>Copart MI - Kincheloe</option>
+      <option>Copart MI - Flint</option>
+      <option>Copart MI - Wayland</option>
+    </optgroup>
+
+    <optgroup label="Copart - Minnesota">
+      <option>Copart MN - Minneapolis</option>
+      <option>Copart MN - St. Cloud</option>
+    </optgroup>
+
+    <optgroup label="Copart - Missouri">
+      <option>Copart MO - Sikeston</option>
+      <option>Copart MO - Springfield</option>
+      <option>Copart MO - Columbia</option>
+      <option>Copart MO - St. Louis</option>
+    </optgroup>
+
+    <optgroup label="Copart - Mississippi">
+      <option>Copart MS - Jackson</option>
+      <option>Copart MS - Grenada</option>
+    </optgroup>
+
+    <optgroup label="Copart - Montana">
+      <option>Copart MT - Helena</option>
+      <option>Copart MT - Billings</option>
+    </optgroup>
+
+    <optgroup label="Copart - North Carolina">
+      <option>Copart NC - Mocksville</option>
+      <option>Copart NC - Lumberton</option>
+      <option>Copart NC - Mebane</option>
+      <option>Copart NC - Raleigh</option>
+      <option>Copart NC - China Grove</option>
+      <option>Copart NC - Concord</option>
+      <option>Copart NC - Raleigh North</option>
+      <option>Copart NC - Gastonia</option>
+    </optgroup>
+
+    <optgroup label="Copart - Nebraska">
+      <option>Copart NE - Lincoln</option>
+    </optgroup>
+
+    <optgroup label="Copart - New Hampshire">
+      <option>Copart NH - Candia</option>
+    </optgroup>
+
+    <optgroup label="Copart - New Jersey">
+      <option>Copart NJ - Trenton</option>
+      <option>Copart NJ - Somerville</option>
+      <option>Copart NJ - Glassboro East</option>
+      <option>Copart NJ - Glassboro West</option>
+    </optgroup>
+
+    <optgroup label="Copart - New Mexico">
+      <option>Copart NM - Albuquerque</option>
+    </optgroup>
+
+    <optgroup label="Copart - Nevada">
+      <option>Copart NV - Reno</option>
+      <option>Copart NV - Las Vegas</option>
+      <option>Copart NV - Las Vegas West</option>
+    </optgroup>
+
+    <optgroup label="Copart - New York">
+      <option>Copart NY - Buffalo</option>
+      <option>Copart NY - Newburgh</option>
+      <option>Copart NY - Rochester</option>
+      <option>Copart NY - Syracuse</option>
+      <option>Copart NY - Long Island</option>
+      <option>Copart NY - Albany</option>
+    </optgroup>
+
+    <optgroup label="Copart - Ohio">
+      <option>Copart OH - Dayton</option>
+      <option>Copart OH - Cleveland East</option>
+      <option>Copart OH - Columbus</option>
+      <option>Copart OH - Cleveland West</option>
+      <option>Copart OH - Akron</option>
+    </optgroup>
+
+    <optgroup label="Copart - Oklahoma">
+      <option>Copart OK - Tulsa</option>
+      <option>Copart OK - Oklahoma City</option>
+    </optgroup>
+
+    <optgroup label="Copart - Oregon">
+      <option>Copart OR - Portland South</option>
+      <option>Copart OR - Portland North</option>
+      <option>Copart OR - Eugene</option>
+    </optgroup>
+
+    <optgroup label="Copart - Pennsylvania">
+      <option>Copart PA - Philadelphia East</option>
+      <option>Copart PA - York Haven</option>
+      <option>Copart PA - Pittsburgh South</option>
+      <option>Copart PA - Philadelphia</option>
+      <option>Copart PA - Harrisburg</option>
+      <option>Copart PA - Pittsburgh North</option>
+      <option>Copart PA - Altoona</option>
+      <option>Copart PA - Scranton</option>
+      <option>Copart PA - Chambersburg</option>
+      <option>Copart PA - Pittsburgh West</option>
+    </optgroup>
+
+    <optgroup label="Copart - Rhode Island">
+      <option>Copart RI - Exeter</option>
+    </optgroup>
+
+    <optgroup label="Copart - South Carolina">
+      <option>Copart SC - North Charleston</option>
+      <option>Copart SC - Spartanburg</option>
+      <option>Copart SC - Columbia</option>
+    </optgroup>
+
+    <optgroup label="Copart - Tennessee">
+      <option>Copart TN - Memphis</option>
+      <option>Copart TN - Knoxville</option>
+      <option>Copart TN - Nashville</option>
+    </optgroup>
+
+    <optgroup label="Copart - Texas">
+      <option>Copart TX - Waco</option>
+      <option>Copart TX - Andrews</option>
+      <option>Copart TX - San Antonio</option>
+      <option>Copart TX - Dallas South</option>
+      <option>Copart TX - CrashedToys Dallas</option>
+      <option>Copart TX - Austin</option>
+      <option>Copart TX - McAllen</option>
+      <option>Copart TX - Lufkin</option>
+      <option>Copart TX - Longview</option>
+      <option>Copart TX - Houston</option>
+      <option>Copart TX - Ft. Worth</option>
+      <option>Copart TX - Dallas</option>
+      <option>Copart TX - Corpus Christi</option>
+      <option>Copart TX - El Paso</option>
+      <option>Copart TX - Amarillo</option>
+      <option>Copart TX - Abilene</option>
+      <option>Copart TX - Houston East</option>
+    </optgroup>
+
+    <optgroup label="Copart - Utah">
+      <option>Copart UT - Ogden</option>
+      <option>Copart UT - Salt Lake City</option>
+    </optgroup>
+
+    <optgroup label="Copart - Virginia">
+      <option>Copart VA - Richmond East</option>
+      <option>Copart VA - Fredericksburg</option>
+      <option>Copart VA - Richmond</option>
+      <option>Copart VA - Hampton</option>
+      <option>Copart VA - Danville</option>
+    </optgroup>
+
+    <optgroup label="Copart - Vermont">
+      <option>Copart VT - Rutland</option>
+    </optgroup>
+
+    <optgroup label="Copart - Wisconsin">
+      <option>Copart WI - Appleton</option>
+      <option>Copart WI - Madison South</option>
+      <option>Copart WI - Milwaukee North</option>
+      <option>Copart WI - Milwaukee South</option>
+    </optgroup>
+
+    <optgroup label="Copart - West Virginia">
+      <option>Copart WV - Charleston</option>
+    </optgroup>
+
+    <optgroup label="Copart - Wyoming">
+      <option>Copart WY - Casper</option>
+    </optgroup>
+
+    <!-- IAAI LOCATIONS -->
+    <optgroup label="IAAI - Alaska">
+      <option>IAAI Anchorage (AK)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Alabama">
+      <option>IAAI Dothan (AL)</option>
+      <option>IAAI Birmingham (AL)</option>
+      <option>IAAI Huntsville (AL)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Arkansas">
+      <option>IAAI Fayetteville (AR)</option>
+      <option>IAAI Little Rock (AR)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Arizona">
+      <option>IAAI Tucson (AZ)</option>
+      <option>IAAI Phoenix (AZ)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - California">
+      <option>IAAI ACE - Carson (CA)</option>
+      <option>IAAI ACE - Perris (CA)</option>
+      <option>IAAI San Diego (CA)</option>
+      <option>IAAI Sacramento (CA)</option>
+      <option>IAAI North Hollywood (CA)</option>
+      <option>IAAI High Desert (CA)</option>
+      <option>IAAI Los Angeles (CA)</option>
+      <option>IAAI Fresno (CA)</option>
+      <option>IAAI Fremont (CA)</option>
+      <option>IAAI Fontana (CA)</option>
+      <option>IAAI Colton (CA)</option>
+      <option>IAAI East Bay (CA)</option>
+      <option>IAAI Anaheim (CA)</option>
+      <option>IAAI Los Angeles South (CA)</option>
+      <option>IAAI Santa Clarita (CA)</option>
+      <option>IAAI Riverside (CA)</option>
+      <option>IAAI Stockton (CA)</option>
+      <option>IAAI ACE - Perris 2 (CA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Colorado">
+      <option>IAAI Western Colorado (CO)</option>
+      <option>IAAI Denver East (CO)</option>
+      <option>IAAI Colorado Springs (CO)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Connecticut">
+      <option>IAAI Hartford (CT)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Delaware">
+      <option>IAAI New Castle (DE)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Florida">
+      <option>IAAI Tampa North (FL)</option>
+      <option>IAAI Orlando-North (FL)</option>
+      <option>IAAI Miami-North (FL)</option>
+      <option>IAAI Tampa (FL)</option>
+      <option>IAAI Orlando (FL)</option>
+      <option>IAAI Pensacola (FL)</option>
+      <option>IAAI Jacksonville (FL)</option>
+      <option>IAAI Fort Pierce (FL)</option>
+      <option>IAAI Clearwater (FL)</option>
+      <option>IAAI Fort Myers (FL)</option>
+      <option>IAAI West Palm Beach (FL)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Georgia">
+      <option>IAAI Macon (GA)</option>
+      <option>IAAI Atlanta East (GA)</option>
+      <option>IAAI Tifton (GA)</option>
+      <option>IAAI Savannah (GA)</option>
+      <option>IAAI Atlanta (GA)</option>
+      <option>IAAI Atlanta South (GA)</option>
+      <option>IAAI Atlanta North (GA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Hawaii">
+      <option>IAAI Honolulu (HI)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Iowa">
+      <option>IAAI Des Moines (IA)</option>
+      <option>IAAI Davenport (IA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Idaho">
+      <option>IAAI Boise (ID)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Illinois">
+      <option>IAAI Specialty Division (IL)</option>
+      <option>IAAI Lincoln (IL)</option>
+      <option>IAAI Chicago-North (IL)</option>
+      <option>IAAI Chicago-South (IL)</option>
+      <option>IAAI Chicago-West (IL)</option>
+      <option>IAAI St. Louis (IL)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Indiana">
+      <option>IAAI South Bend (IN)</option>
+      <option>IAAI Indianapolis (IN)</option>
+      <option>IAAI Indianapolis South (IN)</option>
+      <option>IAAI Fort Wayne (IN)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Kansas">
+      <option>IAAI Wichita (KS)</option>
+      <option>IAAI Kansas City (KS)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Kentucky">
+      <option>IAAI Paducah (KY)</option>
+      <option>IAAI Bowling Green (KY)</option>
+      <option>IAAI Ashland (KY)</option>
+      <option>IAAI Louisville North (KY)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Louisiana">
+      <option>IAAI New Orleans East (LA)</option>
+      <option>IAAI Shreveport (LA)</option>
+      <option>IAAI Lafayette (LA)</option>
+      <option>IAAI Baton Rouge (LA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Massachusetts">
+      <option>IAAI Templeton (MA)</option>
+      <option>IAAI Boston - Shirley (MA)</option>
+      <option>IAAI Taunton (MA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Maryland">
+      <option>IAAI Dundalk (MD)</option>
+      <option>IAAI Metro DC (MD)</option>
+      <option>IAAI Baltimore (MD)</option>
+      <option>IAAI Elkton (MD)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Maine">
+      <option>IAAI Portland - Gorham (ME)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Michigan">
+      <option>IAAI Flint (MI)</option>
+      <option>IAAI Grand Rapids (MI)</option>
+      <option>IAAI Detroit (MI)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Minnesota">
+      <option>IAAI Minneapolis/St. Paul (MN)</option>
+      <option>IAAI Minneapolis South (MN)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Missouri">
+      <option>IAAI Kansas City East (MO)</option>
+      <option>IAAI Springfield (MO)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Mississippi">
+      <option>IAAI Gulf Coast (MS)</option>
+      <option>IAAI Jackson (MS)</option>
+      <option>IAAI Grenada (MS)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Montana">
+      <option>IAAI Missoula (MT)</option>
+      <option>IAAI Billings (MT)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - North Carolina">
+      <option>IAAI Greensboro (NC)</option>
+      <option>IAAI Asheville (NC)</option>
+      <option>IAAI Concord (NC)</option>
+      <option>IAAI Raleigh (NC)</option>
+      <option>IAAI Charlotte (NC)</option>
+      <option>IAAI Wilmington (NC)</option>
+      <option>IAAI High Point (NC)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Nebraska">
+      <option>IAAI Omaha (NE)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - New Hampshire">
+      <option>IAAI Manchester (NH)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - New Jersey">
+      <option>IAAI Southern New Jersey (NJ)</option>
+      <option>IAAI Central New Jersey (NJ)</option>
+      <option>IAAI Avenel New Jersey (NJ)</option>
+      <option>IAAI Englishtown (NJ)</option>
+      <option>IAAI Sayreville (NJ)</option>
+      <option>IAAI Port Murray (NJ)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - New Mexico">
+      <option>IAAI Albuquerque (NM)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Nevada">
+      <option>IAAI Las Vegas (NV)</option>
+      <option>IAAI Reno (NV)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - New York">
+      <option>IAAI Staten Island (NY)</option>
+      <option>IAAI Albany (NY)</option>
+      <option>IAAI Newburgh (NY)</option>
+      <option>IAAI Rochester (NY)</option>
+      <option>IAAI Long Island (NY)</option>
+      <option>IAAI Syracuse (NY)</option>
+      <option>IAAI Buffalo (NY)</option>
+      <option>IAAI Monticello (NY)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Ohio">
+      <option>IAAI Columbus (OH)</option>
+      <option>IAAI Cincinnati-South (OH)</option>
+      <option>IAAI Cincinnati (OH)</option>
+      <option>IAAI Akron-Canton (OH)</option>
+      <option>IAAI Dayton (OH)</option>
+      <option>IAAI Cleveland (OH)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Oklahoma">
+      <option>IAAI Tulsa (OK)</option>
+      <option>IAAI Oklahoma City (OK)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Oregon">
+      <option>IAAI Portland West (OR)</option>
+      <option>IAAI Portland (OR)</option>
+      <option>IAAI Eugene (OR)</option>
+      <option>IAAI Portland South (OR)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Pennsylvania">
+      <option>IAAI York Springs (PA)</option>
+      <option>IAAI Erie (PA)</option>
+      <option>IAAI Scranton (PA)</option>
+      <option>IAAI Pittsburgh-North (PA)</option>
+      <option>IAAI Altoona (PA)</option>
+      <option>IAAI Philadelphia (PA)</option>
+      <option>IAAI Bridgeport (PA)</option>
+      <option>IAAI Pittsburgh (PA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Rhode Island">
+      <option>IAAI Providence (RI)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - South Carolina">
+      <option>IAAI Lexington (SC)</option>
+      <option>IAAI Greenville (SC)</option>
+      <option>IAAI Charleston (SC)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Tennessee">
+      <option>IAAI Nashville (TN)</option>
+      <option>IAAI Memphis (TN)</option>
+      <option>IAAI Knoxville (TN)</option>
+      <option>IAAI Chattanooga (TN)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Texas">
+      <option>IAAI Houston South (TX)</option>
+      <option>IAAI Fort Worth North (TX)</option>
+      <option>IAAI Permian Basin (TX)</option>
+      <option>IAAI Houston-North (TX)</option>
+      <option>IAAI Dallas (TX)</option>
+      <option>IAAI San Antonio-South (TX)</option>
+      <option>IAAI McAllen (TX)</option>
+      <option>IAAI Lubbock (TX)</option>
+      <option>IAAI Longview (TX)</option>
+      <option>IAAI Houston (TX)</option>
+      <option>IAAI Dallas/Ft Worth (TX)</option>
+      <option>IAAI El Paso (TX)</option>
+      <option>IAAI Austin (TX)</option>
+      <option>IAAI Corpus Christi (TX)</option>
+      <option>IAAI Amarillo (TX)</option>
+      <option>IAAI Abilene (TX)</option>
+      <option>IAAI Austin North (TX)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Utah">
+      <option>IAAI Salt Lake City (UT)</option>
+      <option>IAAI Provo (UT)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Virginia">
+      <option>IAAI Suffolk (VA)</option>
+      <option>IAAI Tidewater (VA)</option>
+      <option>IAAI Pulaski (VA)</option>
+      <option>IAAI Northern Virginia (VA)</option>
+      <option>IAAI Culpeper (VA)</option>
+      <option>IAAI Richmond (VA)</option>
+      <option>IAAI Roanoke (VA)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Vermont">
+      <option>IAAI Burlington (VT)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Wisconsin">
+      <option>IAAI Milwaukee (WI)</option>
+      <option>IAAI Portage (WI)</option>
+      <option>IAAI Appleton (WI)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - West Virginia">
+      <option>IAAI Shady Spring (WV)</option>
+      <option>IAAI Buckhannon (WV)</option>
+    </optgroup>
+
+    <optgroup label="IAAI - Wyoming">
+      <option>IAAI Casper (WY)</option>
+    </optgroup>
+  </select>
+</div>
           
           <div class="form-group">
             <label class="form-label" for="shipping">{{ t('calculator.shipping') }}</label>
@@ -573,14 +1218,14 @@ const calculate = () => {
             <p class="form-note">{{ t('calculator.shippingPlaceholder') }}</p>
           </div>
           
-          <div class="form-group">
+         <!-- <div class="form-group">
             <label class="form-label" for="origin">{{ t('calculator.origin') }}</label>
             <select id="origin" v-model="values.origin" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
               <option value="eaeu">{{ t('calculator.originEAEU') }}</option>
               <option value="noneaeu">{{ t('calculator.originNonEAEU') }}</option>
             </select>
-          </div>
+          </div>-->
 
           <div class="form-group">
             <label class="form-label" for="engineType">{{ t('calculator.engineType') }}</label>
