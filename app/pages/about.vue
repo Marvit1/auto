@@ -25,7 +25,7 @@
           <!-- Վարդան -->
           <div class="team-member">
             <div class="member-image">
-              <div class="image-placeholder">📷</div>
+              <img src="../assets/Vrd.jfif" alt="Վարդան Դավթյան" class="team-photo" />
             </div>
             <div class="member-info">
               <h3>{{ $t('about.vardaName') }}</h3>
@@ -47,7 +47,7 @@
           <!-- Արտակ -->
           <div class="team-member">
             <div class="member-image">
-              <div class="image-placeholder">📷</div>
+              <img src="../assets/Art.jfif" alt="Արտակ Վոսկանյան" class="team-photo" />
             </div>
             <div class="member-info">
               <h3>{{ $t('about.artakName') }}</h3>
@@ -69,7 +69,7 @@
           <!-- Դավիթ -->
           <div class="team-member">
             <div class="member-image">
-              <div class="image-placeholder">📷</div>
+              <img src="../assets/Davo.jfif" alt="Դավիթ Ոսկանյան" class="team-photo" />
             </div>
             <div class="member-info">
               <h3>{{ $t('about.davidName') }}</h3>
@@ -86,55 +86,6 @@
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-badge">{{ $t('about.whyBadge') }}</span>
-          <h2>{{ $t('about.whyTitle') }}</h2>
-          <p>{{ $t('about.whySubtitle') }}</p>
-        </div>
-
-        <div class="why-grid">
-          <div class="why-card">
-            <div class="why-icon">⚡</div>
-            <h3>{{ $t('about.feature1Title') }}</h3>
-            <p>{{ $t('about.feature1Desc') }}</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">🛡️</div>
-            <h3>{{ $t('about.feature2Title') }}</h3>
-            <p>{{ $t('about.feature2Desc') }}</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">💰</div>
-            <h3>{{ $t('about.feature3Title') }}</h3>
-            <p>{{ $t('about.feature3Desc') }}</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">🚗</div>
-            <h3>{{ $t('about.feature4Title') }}</h3>
-            <p>{{ $t('about.feature4Desc') }}</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">📱</div>
-            <h3>{{ $t('about.feature5Title') }}</h3>
-            <p>{{ $t('about.feature5Desc') }}</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">🎯</div>
-            <h3>{{ $t('about.feature6Title') }}</h3>
-            <p>{{ $t('about.feature6Desc') }}</p>
           </div>
         </div>
       </div>
@@ -373,9 +324,11 @@
   justify-content: center;
 }
 
-.image-placeholder {
-  font-size: 80px;
-  opacity: 0.7;
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .member-info {
@@ -431,52 +384,6 @@
 
 .contact-icon {
   font-size: 18px;
-}
-
-/* Why Section */
-.why-section {
-  padding: 5rem 2rem;
-  background: white;
-}
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-}
-
-.why-card {
-  padding: 2.5rem 2rem;
-  background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%);
-  border: 1px solid rgba(102,126,234,0.1);
-  border-radius: 16px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.why-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.15);
-  border-color: rgba(102,126,234,0.3);
-}
-
-.why-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-}
-
-.why-card h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 0.8rem;
-}
-
-.why-card p {
-  color: #6b7280;
-  line-height: 1.6;
-  font-size: 0.95rem;
 }
 
 /* Stats Section */
@@ -654,7 +561,6 @@
   }
 
   .team-section,
-  .why-section,
   .contact-section {
     padding: 3rem 1.5rem;
   }
