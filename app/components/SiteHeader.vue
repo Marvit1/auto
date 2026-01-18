@@ -1,19 +1,7 @@
 <template>
   <header class="classic-header" :class="{ scrolled: isScrolled }">
 
-<div class="footer-brand">
-          <div class="brand-logo">
-            <div class="logo-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M5 17h14v2H5v-2zm7-11c3.53 0 6.43 2.61 6.92 6H5.08c.49-3.39 3.39-6 6.92-6M19 9c-.5-4.42-4.25-8-9-8S1.5 4.58 1 9h18zm-7 3l-2.5 4h5L12 12z" fill="currentColor"/>
-              </svg>
-            </div>
-          <div class="brand-text">
-            <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
-            <span class="brand-tagline">{{ t('footer.tagline') }}</span>
-          </div>
-          </div>
-          </div>
+
 
 
     <div class="header-container">
