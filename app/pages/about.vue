@@ -17,7 +17,6 @@
         <div class="section-header">
           <span class="section-badge">Թիմ</span>
           <h2>Մեր պրոֆեսիոնալ թիմ</h2>
-          <p>Մենք ձեզ ծառայության համար պատրաստ</p>
         </div>
         
         <div class="team-grid">
