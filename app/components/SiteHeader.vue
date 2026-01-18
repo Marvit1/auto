@@ -13,6 +13,7 @@
             <span class="brand-tagline">{{ t('footer.tagline') }}</span>
           </div>
           </div>
+          </div>
 
 
     <div class="header-container">
