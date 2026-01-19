@@ -28,12 +28,12 @@
       <div class="featured-overlay"></div>
       
       <!-- Content -->
-      <div class="container featured-content">
+     <!-- <div class="container featured-content">
         <div v-if="loading" class="status">{{ t('hero.loading') }}</div>
-        <div v-else class="cars-grid">
+       <div v-else class="cars-grid">
           <CarCard v-for="c in cars" :key="c.id" :car="c" />
         </div>
-      </div>
+      </div>-->
     </section>
   </div>
 </template>
