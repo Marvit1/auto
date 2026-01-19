@@ -4,7 +4,7 @@
     <section class="hero-section">
       <!-- Video Background -->
       <video class="hero-video" autoplay muted loop playsinline>
-        <source src="/vid.mp4" type="video/mp4">
+        <source src="/buy.mp4" type="video/mp4">
       </video>
       
       <!-- Dark Overlay -->
@@ -21,7 +21,7 @@
     <section class="featured-section">
       <!-- Video background -->
       <video class="featured-video" autoplay muted loop playsinline>
-        <source src="/indox.mp4" type="video/mp4">
+        <source src="/vid.mp4" type="video/mp4">
       </video>
       
       <!-- Overlay for readability -->
