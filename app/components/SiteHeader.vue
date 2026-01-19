@@ -293,6 +293,7 @@ onUnmounted(() => {
   background-size: contain;   /* լոգոն ամբողջությամբ երևա */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 12px;
 
   flex-shrink: 0;
   transition: transform 0.3s ease;
