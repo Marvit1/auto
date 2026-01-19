@@ -8,16 +8,12 @@
       <!-- Logo Section -->
       <NuxtLink to="/" class="logo-section">
         
-        <!-- Brand Section -->
-        <div class="footer-brand">
-          <div class="brand-logo">
-            
-          <div class="brand-text">
-           
-          </div>
-          </div>
-        </div>
+        
+        
       </NuxtLink>
+      <div class="brand-text">
+            <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
+          </div>
 
       <!-- Desktop Navigation -->
       <nav class="desktop-nav">
@@ -706,7 +702,9 @@ onUnmounted(() => {
     height: 20px;
   }
 
-  .brand-text {
+ 
+
+.brand-text {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -723,19 +721,6 @@ onUnmounted(() => {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.brand-tagline {
-  font-size: 0.85rem;
-  color: #a0aec0;
-  font-weight: 500;
-}
-
-.brand-description {
-  color: #cbd5e0;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin: 0;
 }
 }
 
