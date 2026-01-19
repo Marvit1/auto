@@ -9,7 +9,9 @@
       <NuxtLink to="/" class="logo-section">
         
         
-        
+        <div class="brand-text">
+            <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
+          </div>
       </NuxtLink>
       <NuxtLink to="/">
       <div class="brand-text">
