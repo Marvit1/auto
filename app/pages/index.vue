@@ -17,15 +17,15 @@
       </div>
     </section>
 
-    <!-- Featured Cars Grid - Container Width -->
+    <!-- Featured Cars Grid - Container Width 
     <section class="featured-section">
-      <!-- Video background -->
+       Video background 
       <video class="featured-video" autoplay muted loop playsinline>
         <source src="/vid.mp4" type="video/mp4">
       </video>
       
-      <!-- Overlay for readability -->
-      <div class="featured-overlay"></div>
+      Overlay for readability 
+      <div class="featured-overlay"></div>-->
       
       <!-- Content -->
      <!-- <div class="container featured-content">
@@ -33,8 +33,8 @@
        <div v-else class="cars-grid">
           <CarCard v-for="c in cars" :key="c.id" :car="c" />
         </div>
-      </div>-->
-    </section>
+      </div>
+    </section>-->
   </div>
 </template>
 
