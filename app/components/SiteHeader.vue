@@ -5,12 +5,12 @@
 
 
     <div class="header-container">
-      <!-- Logo Section -->
+      <!-- Logo Section 
       <NuxtLink to="/" class="logo-section">
         
         
         
-      </NuxtLink>
+      </NuxtLink>-->
       <NuxtLink to="/">
       <div class="brand-text">
             <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
