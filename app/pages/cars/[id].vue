@@ -418,7 +418,11 @@ const makeOffer = () => {
 </script>
 
 <style scoped>
- *{
+ /* ============================================
+   DESKTOP VERSION (1200px և բարձր)
+   ============================================ */
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -1023,7 +1027,7 @@ const makeOffer = () => {
 }
 
 /* ============================================
-   TABLET VERSION (769px - 1199px)
+   LARGE TABLET/SMALL DESKTOP (1024px - 1199px)
    ============================================ */
 
 @media (max-width: 1199px) {
@@ -1063,14 +1067,23 @@ const makeOffer = () => {
   }
 }
 
-@media (max-width: 1024px) {
+/* ============================================
+   IPAD / STANDARD TABLET (769px - 1023px)
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .hero-section {
+    padding: 28px 20px;
+  }
+
   .detail-container {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .main-image-container {
     height: 380px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .thumbnails-row {
@@ -1085,40 +1098,266 @@ const makeOffer = () => {
   .info-section {
     gap: 20px;
   }
+
+  .car-title {
+    font-size: 1.6rem;
+  }
+
+  .price-value {
+    font-size: 1.8rem;
+  }
+
+  .glass-card {
+    padding: 22px;
+  }
+
+  .section-title {
+    font-size: 1.15rem;
+  }
 }
 
 /* ============================================
-   MOBILE VERSION (481px - 768px)
+   LARGER PHONES (Samsung S21, S22, Pixel 6/7, iPhone 14+)
+   (600px - 768px)
    ============================================ */
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 16px 16px 30px 16px;
+    padding: 20px 16px 30px 16px;
     min-height: auto;
   }
 
   .back-button {
-    padding: 10px 16px;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
+    padding: 11px 18px;
+    font-size: 0.97rem;
+    margin-bottom: 22px;
   }
 
   .back-button svg {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
+  }
+
+  .main-image-container {
+    height: 320px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+  }
+
+  .image-badges {
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    gap: 10px;
+  }
+
+  .year-badge {
+    padding: 9px 16px;
+    font-size: 0.88rem;
+  }
+
+  .status-badge {
+    padding: 9px 13px;
+    font-size: 0.78rem;
+  }
+
+  .nav-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.6rem;
+  }
+
+  .nav-arrow.prev {
+    left: 14px;
+  }
+
+  .nav-arrow.next {
+    right: 14px;
+  }
+
+  .image-counter {
+    bottom: 14px;
+    padding: 7px 15px;
+    font-size: 0.82rem;
+  }
+
+  .thumbnails-row {
+    gap: 9px;
+    margin-bottom: 4px;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 64px;
+    border-radius: 9px;
+  }
+
+  .car-title {
+    font-size: 1.55rem;
+    gap: 5px;
+  }
+
+  .make {
+    font-size: 0.8rem;
+    letter-spacing: 1.1px;
+  }
+
+  .share-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .share-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .glass-card {
+    padding: 22px;
+    border-radius: 11px;
+  }
+
+  .price-section {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .price-label {
+    font-size: 0.77rem;
+    margin-bottom: 8px;
+  }
+
+  .price-value {
+    font-size: 2rem;
+  }
+
+  .quick-specs {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .quick-spec {
+    padding: 16px;
+  }
+
+  .spec-label {
+    font-size: 0.72rem;
+    margin-bottom: 5px;
+  }
+
+  .spec-value {
+    font-size: 1rem;
+    gap: 7px;
+  }
+
+  .color-dot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
+
+  .spec-row {
+    padding: 16px;
+  }
+
+  .spec-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .spec-key {
+    font-size: 0.72rem;
+  }
+
+  .spec-val {
+    font-size: 1rem;
+  }
+
+  .contact-buttons {
+    gap: 11px;
+    margin-bottom: 18px;
+  }
+
+  .primary-action-btn,
+  .secondary-action-btn {
+    padding: 15px 18px;
+    font-size: 0.98rem;
+    border-radius: 9px;
+    gap: 9px;
+  }
+
+  .primary-action-btn svg,
+  .secondary-action-btn svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .contact-info {
+    gap: 11px;
+    padding-top: 14px;
+  }
+
+  .info-item {
+    font-size: 0.88rem;
+    gap: 9px;
+  }
+
+  .info-item svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .description-text {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .lightbox-image {
+    max-height: 72vh;
+  }
+
+  .lightbox-nav {
+    gap: 18px;
+    margin-top: 14px;
+  }
+
+  .nav-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   MEDIUM PHONES (Samsung S10, S20, Pixel 5, iPhone 12/13)
+   (500px - 599px)
+   ============================================ */
+
+@media (max-width: 599px) {
+  .hero-section {
+    padding: 18px 14px 26px 14px;
+  }
+
+  .back-button {
+    padding: 10px 16px;
+    font-size: 0.94rem;
+    margin-bottom: 18px;
   }
 
   .main-image-container {
     height: 280px;
     margin-bottom: 16px;
-    border-radius: 12px;
   }
 
   .image-badges {
     top: 12px;
     left: 12px;
     right: 12px;
-    gap: 8px;
   }
 
   .year-badge {
@@ -1153,12 +1392,11 @@ const makeOffer = () => {
 
   .thumbnails-row {
     gap: 8px;
-    margin-bottom: 4px;
   }
 
   .thumbnail {
-    width: 70px;
-    height: 56px;
+    width: 75px;
+    height: 60px;
     border-radius: 8px;
   }
 
@@ -1168,7 +1406,7 @@ const makeOffer = () => {
   }
 
   .make {
-    font-size: 0.75rem;
+    font-size: 0.77rem;
     letter-spacing: 1px;
   }
 
@@ -1185,6 +1423,7 @@ const makeOffer = () => {
   .glass-card {
     padding: 20px;
     border-radius: 10px;
+    margin-bottom: 16px;
   }
 
   .price-section {
@@ -1198,11 +1437,10 @@ const makeOffer = () => {
   }
 
   .price-value {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
   }
 
   .quick-specs {
-    grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -1232,11 +1470,6 @@ const makeOffer = () => {
 
   .spec-row {
     padding: 14px;
-  }
-
-  .spec-info {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .spec-key {
@@ -1273,7 +1506,7 @@ const makeOffer = () => {
 
   .info-item {
     font-size: 0.85rem;
-    gap: 10px;
+    gap: 8px;
   }
 
   .info-item svg {
@@ -1292,7 +1525,7 @@ const makeOffer = () => {
 
   .lightbox-nav {
     gap: 16px;
-    margin-top: 16px;
+    margin-top: 12px;
   }
 
   .nav-btn {
@@ -1303,79 +1536,76 @@ const makeOffer = () => {
 }
 
 /* ============================================
-   SMALL MOBILE VERSION (320px - 480px)
+   SMALL PHONES (Samsung A12, A21, iPhone SE, Pixel 4a)
+   (400px - 499px)
    ============================================ */
 
-@media (max-width: 480px) {
+@media (max-width: 499px) {
   .hero-section {
-    padding: 12px 12px 24px 12px;
+    padding: 14px 12px 22px 12px;
   }
 
   .back-button {
-    padding: 8px 12px;
+    padding: 9px 14px;
     font-size: 0.9rem;
     margin-bottom: 16px;
-    width: 100%;
-    justify-content: center;
   }
 
   .main-image-container {
-    height: 220px;
-    margin-bottom: 12px;
+    height: 240px;
+    margin-bottom: 14px;
   }
 
   .image-badges {
-    top: 8px;
-    left: 8px;
-    right: 8px;
+    top: 10px;
+    left: 10px;
+    right: 10px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
   }
 
   .year-badge {
-    padding: 6px 12px;
+    padding: 7px 12px;
     font-size: 0.8rem;
   }
 
   .status-badge {
-    padding: 6px 10px;
+    padding: 7px 10px;
     font-size: 0.7rem;
   }
 
   .nav-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.4rem;
   }
 
   .image-counter {
-    bottom: 8px;
-    padding: 4px 12px;
+    bottom: 10px;
+    padding: 5px 12px;
     font-size: 0.75rem;
   }
 
   .thumbnails-row {
-    gap: 6px;
+    gap: 7px;
   }
 
   .thumbnail {
-    width: 60px;
-    height: 48px;
+    width: 70px;
+    height: 56px;
   }
 
   .car-title {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
-  .title-header {
-    margin-bottom: 16px;
+  .make {
+    font-size: 0.72rem;
   }
 
   .glass-card {
-    padding: 16px;
-    border-radius: 10px;
-    margin-bottom: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
   }
 
   .price-section {
@@ -1404,6 +1634,10 @@ const makeOffer = () => {
     padding: 12px;
   }
 
+  .spec-value {
+    font-size: 0.9rem;
+  }
+
   .primary-action-btn,
   .secondary-action-btn {
     padding: 12px 14px;
@@ -1417,32 +1651,244 @@ const makeOffer = () => {
 
   .info-item {
     font-size: 0.8rem;
+    gap: 8px;
   }
 
   .description-text {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+  }
+
+  .lightbox-image {
+    max-height: 65vh;
+  }
+
+  .nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================================
+   TINY PHONES (iPhone 5/SE, Samsung A10)
+   (320px - 399px)
+   ============================================ */
+
+@media (max-width: 399px) {
+  .hero-section {
+    padding: 12px 10px 18px 10px;
+  }
+
+  .back-button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+
+  .back-button svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .main-image-container {
+    height: 200px;
+    margin-bottom: 12px;
+  }
+
+  .image-badges {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    gap: 4px;
+  }
+
+  .year-badge {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .status-badge {
+    padding: 6px 8px;
+    font-size: 0.65rem;
+  }
+
+  .nav-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+
+  .nav-arrow.prev {
+    left: 10px;
+  }
+
+  .nav-arrow.next {
+    right: 10px;
+  }
+
+  .image-counter {
+    bottom: 8px;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+  }
+
+  .thumbnails-row {
+    gap: 6px;
+  }
+
+  .thumbnail {
+    width: 64px;
+    height: 51px;
+  }
+
+  .car-title {
+    font-size: 1.1rem;
+    gap: 3px;
+  }
+
+  .make {
+    font-size: 0.65rem;
+    letter-spacing: 0.8px;
+  }
+
+  .share-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .share-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .title-header {
+    margin-bottom: 14px;
+  }
+
+  .glass-card {
+    padding: 16px;
+    border-radius: 9px;
+    margin-bottom: 12px;
+  }
+
+  .price-section {
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  .price-label {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .price-value {
+    font-size: 1.4rem;
+  }
+
+  .quick-specs {
+    gap: 8px;
+  }
+
+  .quick-spec {
+    padding: 10px;
+  }
+
+  .spec-label {
+    font-size: 0.65rem;
+    margin-bottom: 3px;
+  }
+
+  .spec-value {
+    font-size: 0.85rem;
+    gap: 5px;
+  }
+
+  .color-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
+  .spec-row {
+    padding: 10px;
+  }
+
+  .spec-key {
+    font-size: 0.65rem;
+  }
+
+  .spec-val {
+    font-size: 0.85rem;
+  }
+
+  .contact-buttons {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .primary-action-btn,
+  .secondary-action-btn {
+    padding: 11px 12px;
+    font-size: 0.85rem;
+    border-radius: 7px;
+    gap: 6px;
+  }
+
+  .primary-action-btn svg,
+  .secondary-action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contact-info {
+    gap: 7px;
+    padding-top: 8px;
+  }
+
+  .info-item {
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .info-item svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .description-text {
+    font-size: 0.88rem;
+    line-height: 1.55;
   }
 
   .lightbox {
-    padding: 12px;
+    padding: 10px;
   }
 
   .close-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    top: 16px;
-    right: 16px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+    top: 12px;
+    right: 12px;
   }
 
   .lightbox-image {
     max-height: 60vh;
-    border-radius: 8px;
+    border-radius: 7px;
   }
 
   .lightbox-nav {
-    gap: 12px;
-    margin-top: 12px;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .lightbox-nav .image-counter {
+    padding: 4px 10px;
+    font-size: 0.7rem;
   }
 
   .nav-btn {

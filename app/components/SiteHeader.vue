@@ -647,6 +647,18 @@ onUnmounted(() => {
   transform: translateY(-20px);
   opacity: 0;
 }
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+}
+
+.brand-market {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 /* Responsive */
 @media (max-width: 1024px) {
