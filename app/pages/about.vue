@@ -47,7 +47,7 @@
           <!-- Արտակ -->
           <div class="team-member">
             <div class="member-image">
-              <img src="../assets/Art.jfif" alt="Արտակ Վոսկանյան" class="team-photo" />
+              <img src="../assets/artak.jfif" alt="Արտակ Վոսկանյան" class="team-photo" />
             </div>
             <div class="member-info">
               <h3>{{ $t('about.artakName') }}</h3>
