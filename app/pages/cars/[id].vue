@@ -418,7 +418,7 @@ const makeOffer = () => {
 </script>
 
 <style scoped>
-* {
+ *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -442,7 +442,7 @@ const makeOffer = () => {
 .hero-section {
   width: 100%;
   min-height: 100vh;
-  padding: 20px;
+  padding: 40px 20px;
   position: relative;
 }
 
@@ -465,7 +465,7 @@ const makeOffer = () => {
   font-weight: 600;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .back-button:hover {
@@ -521,7 +521,7 @@ const makeOffer = () => {
 .detail-container {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 24px;
+  gap: 32px;
 }
 
 .gallery-section {
@@ -532,12 +532,12 @@ const makeOffer = () => {
   position: relative;
   width: 100%;
   height: 500px;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   background: #f5f7fa;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .main-image {
@@ -548,9 +548,9 @@ const makeOffer = () => {
 
 .image-badges {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
+  top: 20px;
+  left: 20px;
+  right: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -558,23 +558,23 @@ const makeOffer = () => {
 }
 
 .year-badge {
-  padding: 8px 16px;
+  padding: 10px 20px;
   background: white;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 700;
   font-size: 1rem;
   color: #2d3748;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .status-badge {
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .status-armenia {
@@ -596,17 +596,17 @@ const makeOffer = () => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
   font-size: 1.8rem;
   font-weight: bold;
@@ -615,26 +615,26 @@ const makeOffer = () => {
 
 .nav-arrow:hover {
   background: white;
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.15);
 }
 
 .nav-arrow.prev {
-  left: 16px;
+  left: 20px;
 }
 
 .nav-arrow.next {
-  right: 16px;
+  right: 20px;
 }
 
 .image-counter {
   position: absolute;
-  bottom: 16px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 6px 16px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: 24px;
   font-size: 0.875rem;
   font-weight: 600;
   z-index: 5;
@@ -644,16 +644,16 @@ const makeOffer = () => {
   display: flex;
   gap: 12px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 8px 0;
 }
 
 .thumbnail {
-  width: 90px;
-  height: 70px;
-  border-radius: 8px;
+  width: 100px;
+  height: 80px;
+  border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
   transition: all 0.2s ease;
   cursor: pointer;
   background: #f0f2f5;
@@ -667,35 +667,36 @@ const makeOffer = () => {
 
 .thumbnail.active {
   border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .info-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .glass-card {
   background: white;
   border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .title-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .car-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   line-height: 1.2;
   color: #2d3748;
 }
@@ -705,7 +706,7 @@ const makeOffer = () => {
   font-weight: 600;
   font-size: 0.875rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .model {
@@ -713,11 +714,11 @@ const makeOffer = () => {
 }
 
 .share-btn {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #f7fafc;
-  border: 1px solid #e2e8f0;
+  border: 2px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,121 +728,134 @@ const makeOffer = () => {
 
 .share-btn:hover {
   background: #edf2f7;
+  border-color: #cbd5e0;
 }
 
 .share-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   stroke: #2d3748;
 }
 
 .price-section {
-  padding: 20px;
-  background: #f7fafc;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  border-radius: 10px;
+  margin-bottom: 24px;
   border: 1px solid #e2e8f0;
 }
 
 .price-label {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #718096;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
 }
 
 .price-value {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.4rem;
+  font-weight: 800;
   color: #667eea;
 }
 
 .quick-specs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 .quick-spec {
-  padding: 16px;
+  padding: 18px;
   background: #f7fafc;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.quick-spec:hover {
+  border-color: #cbd5e0;
+  background: #edf2f7;
 }
 
 .spec-label {
   font-size: 0.75rem;
   color: #718096;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
 }
 
 .spec-value {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #2d3748;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .color-dot {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 2px solid white;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.35rem;
+  font-weight: 800;
   color: #2d3748;
-  margin: 0 0 20px 0;
+  margin: 0 0 22px 0;
 }
 
 .specs-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .spec-row {
-  padding: 16px;
+  padding: 18px;
   background: #f7fafc;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.spec-row:hover {
+  border-color: #cbd5e0;
 }
 
 .spec-info {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 .spec-key {
   font-size: 0.75rem;
   color: #718096;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .spec-val {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #2d3748;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .contact-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .primary-action-btn,
@@ -849,72 +863,82 @@ const makeOffer = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 16px;
-  border-radius: 8px;
+  gap: 10px;
+  padding: 18px 24px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   transition: all 0.2s ease;
 }
 
 .primary-action-btn {
-  background: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .primary-action-btn:hover {
-  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.primary-action-btn:active {
+  transform: translateY(0);
 }
 
 .primary-action-btn svg,
 .secondary-action-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
 .secondary-action-btn {
   background: #f7fafc;
   color: #2d3748;
-  border: 1px solid #e2e8f0;
+  border: 2px solid #e2e8f0;
 }
 
 .secondary-action-btn:hover {
   background: #edf2f7;
+  border-color: #cbd5e0;
 }
 
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.875rem;
+  gap: 12px;
+  font-size: 0.95rem;
   color: #2d3748;
+  font-weight: 500;
 }
 
 .info-item svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   stroke: #10b981;
   flex-shrink: 0;
 }
 
 .description-text {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #4a5568;
 }
 
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -929,12 +953,15 @@ const makeOffer = () => {
   background: rgba(255, 255, 255, 0.15);
   color: white;
   border: none;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   font-size: 1.5rem;
   cursor: pointer;
   transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .close-btn:hover {
@@ -955,28 +982,28 @@ const makeOffer = () => {
   max-height: 80vh;
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-top: 16px;
+  gap: 24px;
+  margin-top: 20px;
   color: white;
 }
 
 .lightbox-nav .image-counter {
   position: static;
   background: rgba(255, 255, 255, 0.15);
-  padding: 6px 14px;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 22px;
   font-size: 0.875rem;
 }
 
 .nav-btn {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   border: none;
@@ -992,38 +1019,436 @@ const makeOffer = () => {
 
 .nav-btn:hover {
   background: rgba(255, 255, 255, 0.35);
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
-/* 📱 Responsive */
-@media (max-width: 768px) {
+/* ============================================
+   TABLET VERSION (769px - 1199px)
+   ============================================ */
+
+@media (max-width: 1199px) {
+  .hero-section {
+    padding: 30px 20px;
+  }
+
+  .detail-container {
+    grid-template-columns: 1fr 0.9fr;
+    gap: 28px;
+  }
+
+  .main-image-container {
+    height: 420px;
+  }
+
+  .car-title {
+    font-size: 1.8rem;
+  }
+
+  .price-value {
+    font-size: 2rem;
+  }
+
+  .glass-card {
+    padding: 24px;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .primary-action-btn,
+  .secondary-action-btn {
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
   .detail-container {
     grid-template-columns: 1fr;
   }
 
   .main-image-container {
-    height: 320px;
+    height: 380px;
+    margin-bottom: 24px;
   }
 
-  .car-title {
+  .thumbnails-row {
+    gap: 10px;
+  }
+
+  .thumbnail {
+    width: 90px;
+    height: 70px;
+  }
+
+  .info-section {
+    gap: 20px;
+  }
+}
+
+/* ============================================
+   MOBILE VERSION (481px - 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 16px 16px 30px 16px;
+    min-height: auto;
+  }
+
+  .back-button {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .back-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .main-image-container {
+    height: 280px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+  }
+
+  .image-badges {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    gap: 8px;
+  }
+
+  .year-badge {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .status-badge {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
     font-size: 1.5rem;
   }
 
-  .price-value {
-    font-size: 1.5rem;
+  .nav-arrow.prev {
+    left: 12px;
+  }
+
+  .nav-arrow.next {
+    right: 12px;
+  }
+
+  .image-counter {
+    bottom: 12px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
   }
 
   .thumbnails-row {
     gap: 8px;
+    margin-bottom: 4px;
   }
 
   .thumbnail {
     width: 70px;
-    height: 55px;
+    height: 56px;
+    border-radius: 8px;
+  }
+
+  .car-title {
+    font-size: 1.4rem;
+    gap: 4px;
+  }
+
+  .make {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .share-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .share-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .glass-card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .price-section {
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .price-label {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+
+  .price-value {
+    font-size: 1.8rem;
+  }
+
+  .quick-specs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .quick-spec {
+    padding: 14px;
+  }
+
+  .spec-label {
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+  }
+
+  .spec-value {
+    font-size: 0.95rem;
+    gap: 6px;
+  }
+
+  .color-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .spec-row {
+    padding: 14px;
+  }
+
+  .spec-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .spec-key {
+    font-size: 0.7rem;
+  }
+
+  .spec-val {
+    font-size: 0.95rem;
+  }
+
+  .contact-buttons {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .primary-action-btn,
+  .secondary-action-btn {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    gap: 8px;
+  }
+
+  .primary-action-btn svg,
+  .secondary-action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-info {
+    gap: 10px;
+    padding-top: 12px;
+  }
+
+  .info-item {
+    font-size: 0.85rem;
+    gap: 10px;
+  }
+
+  .info-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .description-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .lightbox-image {
-    max-height: 65vh;
+    max-height: 70vh;
+  }
+
+  .lightbox-nav {
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+}
+
+/* ============================================
+   SMALL MOBILE VERSION (320px - 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 12px 12px 24px 12px;
+  }
+
+  .back-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .main-image-container {
+    height: 220px;
+    margin-bottom: 12px;
+  }
+
+  .image-badges {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .year-badge {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .status-badge {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .nav-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+
+  .image-counter {
+    bottom: 8px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+  }
+
+  .thumbnails-row {
+    gap: 6px;
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 48px;
+  }
+
+  .car-title {
+    font-size: 1.2rem;
+  }
+
+  .title-header {
+    margin-bottom: 16px;
+  }
+
+  .glass-card {
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .price-section {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .price-value {
+    font-size: 1.6rem;
+  }
+
+  .quick-specs {
+    gap: 10px;
+  }
+
+  .quick-spec {
+    padding: 12px;
+  }
+
+  .section-title {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .spec-row {
+    padding: 12px;
+  }
+
+  .primary-action-btn,
+  .secondary-action-btn {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  .contact-info {
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .info-item {
+    font-size: 0.8rem;
+  }
+
+  .description-text {
+    font-size: 0.9rem;
+  }
+
+  .lightbox {
+    padding: 12px;
+  }
+
+  .close-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    top: 16px;
+    right: 16px;
+  }
+
+  .lightbox-image {
+    max-height: 60vh;
+    border-radius: 8px;
+  }
+
+  .lightbox-nav {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
   }
 }
 </style>

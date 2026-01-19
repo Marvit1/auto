@@ -15,20 +15,6 @@
         <h1 class="page-title">{{ t('hero.title') }}</h1>
         <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
         
-        <!-- Hero Search Bar 
-        <div class="hero-search">
-          
-           Quick Filters 
-          <div class="quick-filters">
-            <button class="quick-filter">{{ t('hero.quickAbout') }}</button>
-            <button class="quick-filter">{{ t('hero.quickServices') }}</button>
-            <button class="quick-filter">{{ t('hero.quickCars') }}</button>
-            <button class="quick-filter">{{ t('hero.quickHome') }}</button>
-          </div> 
-        </div>-->
-        
-         <!-- Quick Stats -->
-       
       </div>
     </section>
 
@@ -36,14 +22,22 @@
 
     <!-- Featured Cars Grid - Container Width -->
     <section class="featured-section">
-      <div class="container">
-        
-        <div v-if="loading" class="status">{{ t('hero.loading') }}</div>
-        <div v-else class="cars-grid">
-          <CarCard v-for="c in cars" :key="c.id" :car="c" />
-        </div>
-      </div>
-    </section>
+  <!-- ✅ Վիդեո background -->
+  <video class="featured-video" autoplay muted loop playsinline>
+    <source src="/index.mp4" type="video/mp4">
+  </video>
+  
+  <!-- ✅ Overlay -->
+  <div class="featured-overlay"></div>
+  
+  <!-- Content -->
+  <div class="container">
+    <div v-if="loading" class="status">{{ t('hero.loading') }}</div>
+    <div v-else class="cars-grid">
+      <CarCard v-for="c in cars" :key="c.id" :car="c" />
+    </div>
+  </div>
+</section>
   </div>
 </template>
 
@@ -260,9 +254,38 @@ const latestCars = computed(() =>
 
 /* Featured Section */
 .featured-section {
+  position: relative;
   width: 100%;
   padding: 60px 0;
-  background-image: url('../assets/jj.jpg');
+  overflow: hidden;
+}
+
+/* ✅ Վիդեո */
+.featured-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* ✅ Overlay */
+.featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);  /* տակ գու տեքստ լինի */
+  z-index: 1;
+}
+
+/* ✅ Content դրա վրա */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .featured-section h2 {
@@ -283,11 +306,7 @@ const latestCars = computed(() =>
   max-width: 1400px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+
 
 .status {
   text-align: center;
