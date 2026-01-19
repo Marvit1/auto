@@ -1,7 +1,16 @@
 <template>
   <div class="home-page">
-    <!-- Hero Section with Search - Full Width -->
+    <!-- Hero Section with Video Background -->
     <section class="hero-section">
+      <!-- Video Background -->
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="/vid.mp4" type="video/mp4">
+      </video>
+      
+      <!-- Dark Overlay -->
+      <div class="hero-overlay"></div>
+      
+      <!-- Content -->
       <div class="hero-content">
         <h1 class="page-title">{{ t('hero.title') }}</h1>
         <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
@@ -91,10 +100,6 @@ const latestCars = computed(() =>
   padding: 120px 20px 80px;
   color: white;
   text-align: center;
-  background-image: url('../assets/ii.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   min-height: 70vh;
   display: flex;
   align-items: center;
@@ -102,11 +107,22 @@ const latestCars = computed(() =>
   overflow: hidden;
 }
 
-.hero-section::before {
-  content: '';
+/* Video Background */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Dark Overlay */
+.hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5); /* overlay */
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
@@ -260,11 +276,23 @@ const latestCars = computed(() =>
 
 .cars-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Max 4 սյուն */
+  grid-template-columns: repeat(4, 1fr);
   gap: 32px;
-  justify-content: center; /* Կենտրոնացնել ամբողջ ցանցը */
+  justify-content: center;
   margin: 4px auto 0;
-  max-width: 1400px; /* որ ցանցը չլցվի ամբողջ լայնությանը */
+  max-width: 1400px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.status {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
 }
 
 /* Animations */
@@ -275,15 +303,49 @@ const latestCars = computed(() =>
 
 /* Responsive */
 @media (max-width: 768px) {
-  .page-title { font-size: 2.2rem; }
-  .hero-subtitle { font-size: 1.1rem; }
-  .search-input-group { flex-direction: column; }
-  .stat-number { font-size: 2rem; }
-  .cars-grid { grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap:16px; }
+  .hero-section {
+    padding: 60px 20px 40px;
+  }
+
+  .page-title { 
+    font-size: 2.2rem; 
+  }
+
+  .hero-subtitle { 
+    font-size: 1.1rem; 
+  }
+
+  .search-input-group { 
+    flex-direction: column; 
+  }
+
+  .stat-number { 
+    font-size: 2rem; 
+  }
+
+  .cars-grid { 
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+    gap: 16px; 
+  }
 }
 
 @media (max-width: 480px) {
-  .hero-section { padding: 30px 16px 24px; }
-  .cars-grid { grid-template-columns: 1fr; gap:16px; }
+  .hero-section { 
+    padding: 30px 16px 24px; 
+    min-height: 50vh;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .cars-grid { 
+    grid-template-columns: 1fr; 
+    gap: 16px; 
+  }
 }
 </style>
