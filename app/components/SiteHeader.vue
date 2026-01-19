@@ -13,11 +13,7 @@
             <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
           </div>
       </NuxtLink>
-      <NuxtLink to="/">
-      <div class="brand-text">
-            <span class="brand-name">Auto<span class="brand-market">Swift</span></span>
-          </div>
-</NuxtLink>
+      
       <!-- Desktop Navigation -->
       <nav class="desktop-nav">
         <NuxtLink :to="localePath('/')" class="nav-link">
