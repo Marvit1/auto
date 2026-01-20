@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!--<script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -553,7 +553,7 @@ const calculate = () => {
   <select id="auctionLocation" v-model="values.auctionLocation" class="form-field">
     <option value="">{{ t('calculator.select') }}</option>
     
-    <!-- COPART LOCATIONS -->
+  
     <optgroup label="Copart - Alabama">
       <option>Copart AL - Tanner</option>
       <option>Copart AL - Montgomery</option>
@@ -882,7 +882,7 @@ const calculate = () => {
       <option>Copart WY - Casper</option>
     </optgroup>
 
-    <!-- IAAI LOCATIONS -->
+    
     <optgroup label="IAAI - Alaska">
       <option>IAAI Anchorage (AK)</option>
     </optgroup>
@@ -1225,7 +1225,7 @@ const calculate = () => {
               <option value="eaeu">{{ t('calculator.originEAEU') }}</option>
               <option value="noneaeu">{{ t('calculator.originNonEAEU') }}</option>
             </select>
-          </div>-->
+          </div>
 
           <div class="form-group">
             <label class="form-label" for="engineType">{{ t('calculator.engineType') }}</label>
@@ -1720,4 +1720,4 @@ const calculate = () => {
     font-size: 1rem;
   }
 }
-</style>
+</style>-->
