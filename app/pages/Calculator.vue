@@ -53,14 +53,13 @@ const getShippingCostByLocation = (location: string): number => {
     .trim();
 
   const prices: Record<string, number> = {
+    // COPART
     "COPART AL - TANNER": 2390,
     "COPART AL - MONTGOMERY": 2390,
     "COPART AL - BIRMINGHAM": 2390,
     "COPART AL - MOBILE": 2390,
     "COPART AL - DOTHAN": 2370,
     "COPART AL - MOBILE SOUTH": 2380,
-    "COPART AR - FAYETTEVILLE": 2645,
-    "COPART AR - LITTLE ROCK": 2615,
     "COPART AZ - TUCSON": 3080,
     "COPART AZ - PHOENIX": 3020,
     "COPART AZ - PHOENIX NORTH": 3020,
@@ -103,11 +102,104 @@ const getShippingCostByLocation = (location: string): number => {
     "COPART FL - FT. PIERCE": 2180,
     "COPART FL - PUNTA GORDA SOUTH": 2430,
     "COPART FL - JACKSONVILLE NORTH": 2230,
+    "COPART GA - MACON": 2410,
+    "COPART GA - CARTERSVILLE": 2310,
+    "COPART GA - TIFTON": 2350,
+    "COPART GA - SAVANNAH": 2270,
+    "COPART GA - ATLANTA EAST": 2330,
+    "COPART GA - ATLANTA NORTH": 2280,
+    "COPART GA - ATLANTA SOUTH": 2470,
+    "COPART GA - ATLANTA WEST": 2330,
+    "COPART GA - FAIRBURN": 2420,
+    "COPART GA - AUGUSTA": 2330,
+    "COPART TX - WACO": 2430,
+    "COPART TX - ANDREWS": 2655,
+    "COPART TX - SAN ANTONIO": 2480,
+    "COPART TX - DALLAS SOUTH": 2430,
+    "COPART TX - AUSTIN": 2430,
+    "COPART TX - MCALLEN": 2460,
+    "COPART TX - LUFKIN": 2430,
+    "COPART TX - LONGVIEW": 2440,
+    "COPART TX - HOUSTON": 2330,
+    "COPART TX - FT. WORTH": 2470,
+    "COPART TX - DALLAS": 2430,
+    "COPART TX - CORPUS CHRISTI": 2440,
+    "COPART TX - EL PASO": 2655,
+    "COPART TX - AMARILLO": 2680,
+    "COPART TX - ABILENE": 2530,
+    "COPART TX - HOUSTON EAST": 2330,
+    "COPART NY - BUFFALO": 2490,
+    "COPART NY - NEWBURGH": 2280,
+    "COPART NY - ROCHESTER": 2405,
+    "COPART NY - SYRACUSE": 2330,
+    "COPART NY - LONG ISLAND": 2280,
+    "COPART NY - ALBANY": 2305,
+    // IAAI
+    "IAAI TUCSON (AZ)": 3080,
     "IAAI PHOENIX (AZ)": 3020,
+    "IAAI ACE - CARSON (CA)": 2870,
+    "IAAI ACE - PERRIS (CA)": 2940,
+    "IAAI SAN DIEGO (CA)": 2970,
+    "IAAI SACRAMENTO (CA)": 3005,
+    "IAAI NORTH HOLLYWOOD (CA)": 2870,
+    "IAAI HIGH DESERT (CA)": 2930,
     "IAAI LOS ANGELES (CA)": 2870,
+    "IAAI FRESNO (CA)": 2980,
+    "IAAI FREMONT (CA)": 3005,
+    "IAAI FONTANA (CA)": 2850,
+    "IAAI COLTON (CA)": 2840,
+    "IAAI EAST BAY (CA)": 3005,
+    "IAAI ANAHEIM (CA)": 2830,
+    "IAAI LOS ANGELES SOUTH (CA)": 2870,
+    "IAAI SANTA CLARITA (CA)": 2880,
+    "IAAI RIVERSIDE (CA)": 2860,
+    "IAAI STOCKTON (CA)": 3130,
+    "IAAI WESTERN COLORADO (CO)": 3210,
+    "IAAI DENVER EAST (CO)": 2780,
+    "IAAI COLORADO SPRINGS (CO)": 4130,
+    "IAAI TAMPA NORTH (FL)": 2280,
+    "IAAI ORLANDO-NORTH (FL)": 2230,
+    "IAAI MIAMI-NORTH (FL)": 2230,
+    "IAAI TAMPA (FL)": 2230,
+    "IAAI ORLANDO (FL)": 2230,
+    "IAAI PENSACOLA (FL)": 2330,
+    "IAAI JACKSONVILLE (FL)": 2230,
+    "IAAI FORT PIERCE (FL)": 2180,
+    "IAAI CLEARWATER (FL)": 2250,
+    "IAAI FORT MYERS (FL)": 2460,
+    "IAAI WEST PALM BEACH (FL)": 2280,
+    "IAAI MACON (GA)": 2280,
+    "IAAI ATLANTA EAST (GA)": 2330,
+    "IAAI TIFTON (GA)": 2290,
+    "IAAI SAVANNAH (GA)": 2130,
+    "IAAI ATLANTA (GA)": 2330,
+    "IAAI CHICAGO-NORTH (IL)": 2580,
+    "IAAI CHICAGO-SOUTH (IL)": 2580,
+    "IAAI CHICAGO-WEST (IL)": 2530,
+    "IAAI INDIANAPOLIS (IN)": 2580,
+    "IAAI FORT WAYNE (IN)": 2580,
+    "IAAI SOUTHERN NEW JERSEY (NJ)": 2230,
+    "IAAI CENTRAL NEW JERSEY (NJ)": 2180,
+    "IAAI AVENEL NEW JERSEY (NJ)": 2180,
+    "IAAI STATEN ISLAND (NY)": 2280,
+    "IAAI ALBANY (NY)": 2305,
+    "IAAI NEWBURGH (NY)": 2280,
+    "IAAI ROCHESTER (NY)": 2405,
+    "IAAI LONG ISLAND (NY)": 2280,
+    "IAAI SYRACUSE (NY)": 2480,
+    "IAAI BUFFALO (NY)": 2480,
+    "IAAI HOUSTON SOUTH (TX)": 2380,
+    "IAAI FORT WORTH NORTH (TX)": 2470,
+    "IAAI HOUSTON-NORTH (TX)": 2380,
+    "IAAI DALLAS (TX)": 2430,
+    "IAAI SAN ANTONIO-SOUTH (TX)": 2480,
+    "IAAI MCALLEN (TX)": 2480,
+    "IAAI LUBBOCK (TX)": 2630,
+    "IAAI LONGVIEW (TX)": 2470,
     "IAAI HOUSTON (TX)": 2380,
-    "IAAI NEW YORK (NY)": 2280,
-    "IAAI MIAMI (FL)": 2230,
+    "IAAI EL PASO (TX)": 2680,
+    "IAAI AUSTIN (TX)": 2440,
+    "IAAI AMARILLO (TX)": 2680,
   };
 
   return prices[norm] ?? 2500;
@@ -223,17 +315,215 @@ const calculate = () => {
           
           <div class="form-group">
             <label class="form-label" for="auctionLocation">{{ t('calculator.auctionLocation') }}</label>
-            <select id="auctionLocation" v-model="values.auctionLocation" class="form-field">
+            <select id="auctionLocation" v-model="values.auctionLocation" class="form-field" style="max-height: 300px; overflow-y: auto;">
               <option value="">{{ t('calculator.select') }}</option>
-              <option>Copart AL - Tanner</option>
-              <option>Copart AZ - Phoenix</option>
-              <option>Copart CA - Los Angeles</option>
-              <option>Copart FL - Miami Central</option>
-              <option>Copart TX - Houston</option>
-              <option>IAAI Phoenix (AZ)</option>
-              <option>IAAI Los Angeles (CA)</option>
-              <option>IAAI Houston (TX)</option>
-              <option>IAAI New York (NY)</option>
+              
+              <!-- COPART LOCATIONS -->
+              <optgroup label="Copart - Alabama">
+                <option>Copart AL - Tanner</option>
+                <option>Copart AL - Montgomery</option>
+                <option>Copart AL - Birmingham</option>
+                <option>Copart AL - Mobile</option>
+                <option>Copart AL - Dothan</option>
+                <option>Copart AL - Mobile South</option>
+              </optgroup>
+
+              <optgroup label="Copart - Arizona">
+                <option>Copart AZ - Tucson</option>
+                <option>Copart AZ - Phoenix</option>
+                <option>Copart AZ - Phoenix North</option>
+              </optgroup>
+
+              <optgroup label="Copart - California">
+                <option>Copart CA - Antelope</option>
+                <option>Copart CA - Long Beach</option>
+                <option>Copart CA - Sun Valley</option>
+                <option>Copart CA - Van Nuys</option>
+                <option>Copart CA - Vallejo</option>
+                <option>Copart CA - San Jose</option>
+                <option>Copart CA - San Diego</option>
+                <option>Copart CA - Sacramento</option>
+                <option>Copart CA - Rancho Cucamonga</option>
+                <option>Copart CA - Martinez</option>
+                <option>Copart CA - Los Angeles</option>
+                <option>Copart CA - Hayward</option>
+                <option>Copart CA - Fresno</option>
+                <option>Copart CA - San Bernardino</option>
+                <option>Copart CA - Bakersfield</option>
+                <option>Copart CA - Redding</option>
+                <option>Copart CA - Adelanto</option>
+                <option>Copart CA - Mentone</option>
+                <option>Copart CA - So Sacramento</option>
+                <option>Copart CA - Napa</option>
+              </optgroup>
+
+              <optgroup label="Copart - Colorado">
+                <option>Copart CO - Denver</option>
+                <option>Copart CO - Denver South</option>
+                <option>Copart CO - Colorado Springs</option>
+                <option>Copart CO - Denver Central</option>
+              </optgroup>
+
+              <optgroup label="Copart - Connecticut">
+                <option>Copart CT - Hartford Springfield</option>
+                <option>Copart CT - Hartford</option>
+              </optgroup>
+
+              <optgroup label="Copart - Delaware">
+                <option>Copart DE - Seaford</option>
+              </optgroup>
+
+              <optgroup label="Copart - Florida">
+                <option>Copart FL - Orlando North</option>
+                <option>Copart FL - Miami Central</option>
+                <option>Copart FL - West Palm Beach</option>
+                <option>Copart FL - Tampa South</option>
+                <option>Copart FL - Miami North</option>
+                <option>Copart FL - Orlando South</option>
+                <option>Copart FL - Ocala</option>
+                <option>Copart FL - Tallahassee</option>
+                <option>Copart FL - Miami South</option>
+                <option>Copart FL - Ft. Pierce</option>
+                <option>Copart FL - Punta Gorda South</option>
+                <option>Copart FL - Jacksonville North</option>
+              </optgroup>
+
+              <optgroup label="Copart - Georgia">
+                <option>Copart GA - Macon</option>
+                <option>Copart GA - Cartersville</option>
+                <option>Copart GA - Tifton</option>
+                <option>Copart GA - Savannah</option>
+                <option>Copart GA - Atlanta East</option>
+                <option>Copart GA - Atlanta North</option>
+                <option>Copart GA - Atlanta South</option>
+                <option>Copart GA - Atlanta West</option>
+                <option>Copart GA - Fairburn</option>
+                <option>Copart GA - Augusta</option>
+              </optgroup>
+
+              <optgroup label="Copart - Texas">
+                <option>Copart TX - Waco</option>
+                <option>Copart TX - Andrews</option>
+                <option>Copart TX - San Antonio</option>
+                <option>Copart TX - Dallas South</option>
+                <option>Copart TX - Austin</option>
+                <option>Copart TX - McAllen</option>
+                <option>Copart TX - Lufkin</option>
+                <option>Copart TX - Longview</option>
+                <option>Copart TX - Houston</option>
+                <option>Copart TX - Ft. Worth</option>
+                <option>Copart TX - Dallas</option>
+                <option>Copart TX - Corpus Christi</option>
+                <option>Copart TX - El Paso</option>
+                <option>Copart TX - Amarillo</option>
+                <option>Copart TX - Abilene</option>
+                <option>Copart TX - Houston East</option>
+              </optgroup>
+
+              <optgroup label="Copart - New York">
+                <option>Copart NY - Buffalo</option>
+                <option>Copart NY - Newburgh</option>
+                <option>Copart NY - Rochester</option>
+                <option>Copart NY - Syracuse</option>
+                <option>Copart NY - Long Island</option>
+                <option>Copart NY - Albany</option>
+              </optgroup>
+
+              <!-- IAAI LOCATIONS -->
+              <optgroup label="IAAI - Arizona">
+                <option>IAAI Tucson (AZ)</option>
+                <option>IAAI Phoenix (AZ)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - California">
+                <option>IAAI ACE - Carson (CA)</option>
+                <option>IAAI ACE - Perris (CA)</option>
+                <option>IAAI San Diego (CA)</option>
+                <option>IAAI Sacramento (CA)</option>
+                <option>IAAI North Hollywood (CA)</option>
+                <option>IAAI High Desert (CA)</option>
+                <option>IAAI Los Angeles (CA)</option>
+                <option>IAAI Fresno (CA)</option>
+                <option>IAAI Fremont (CA)</option>
+                <option>IAAI Fontana (CA)</option>
+                <option>IAAI Colton (CA)</option>
+                <option>IAAI East Bay (CA)</option>
+                <option>IAAI Anaheim (CA)</option>
+                <option>IAAI Los Angeles South (CA)</option>
+                <option>IAAI Santa Clarita (CA)</option>
+                <option>IAAI Riverside (CA)</option>
+                <option>IAAI Stockton (CA)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - Colorado">
+                <option>IAAI Western Colorado (CO)</option>
+                <option>IAAI Denver East (CO)</option>
+                <option>IAAI Colorado Springs (CO)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - Florida">
+                <option>IAAI Tampa North (FL)</option>
+                <option>IAAI Orlando-North (FL)</option>
+                <option>IAAI Miami-North (FL)</option>
+                <option>IAAI Tampa (FL)</option>
+                <option>IAAI Orlando (FL)</option>
+                <option>IAAI Pensacola (FL)</option>
+                <option>IAAI Jacksonville (FL)</option>
+                <option>IAAI Fort Pierce (FL)</option>
+                <option>IAAI Clearwater (FL)</option>
+                <option>IAAI Fort Myers (FL)</option>
+                <option>IAAI West Palm Beach (FL)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - Georgia">
+                <option>IAAI Macon (GA)</option>
+                <option>IAAI Atlanta East (GA)</option>
+                <option>IAAI Tifton (GA)</option>
+                <option>IAAI Savannah (GA)</option>
+                <option>IAAI Atlanta (GA)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - Illinois">
+                <option>IAAI Chicago-North (IL)</option>
+                <option>IAAI Chicago-South (IL)</option>
+                <option>IAAI Chicago-West (IL)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - Indiana">
+                <option>IAAI Indianapolis (IN)</option>
+                <option>IAAI Fort Wayne (IN)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - New Jersey">
+                <option>IAAI Southern New Jersey (NJ)</option>
+                <option>IAAI Central New Jersey (NJ)</option>
+                <option>IAAI Avenel New Jersey (NJ)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - New York">
+                <option>IAAI Staten Island (NY)</option>
+                <option>IAAI Albany (NY)</option>
+                <option>IAAI Newburgh (NY)</option>
+                <option>IAAI Rochester (NY)</option>
+                <option>IAAI Long Island (NY)</option>
+                <option>IAAI Syracuse (NY)</option>
+                <option>IAAI Buffalo (NY)</option>
+              </optgroup>
+
+              <optgroup label="IAAI - Texas">
+                <option>IAAI Houston South (TX)</option>
+                <option>IAAI Fort Worth North (TX)</option>
+                <option>IAAI Houston-North (TX)</option>
+                <option>IAAI Dallas (TX)</option>
+                <option>IAAI San Antonio-South (TX)</option>
+                <option>IAAI McAllen (TX)</option>
+                <option>IAAI Lubbock (TX)</option>
+                <option>IAAI Longview (TX)</option>
+                <option>IAAI Houston (TX)</option>
+                <option>IAAI El Paso (TX)</option>
+                <option>IAAI Austin (TX)</option>
+                <option>IAAI Amarillo (TX)</option>
+              </optgroup>
             </select>
           </div>
           
