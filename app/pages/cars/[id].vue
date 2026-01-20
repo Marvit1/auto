@@ -226,8 +226,9 @@
   </div>
 </template>
 
+
 <script setup>
-import { ref, computed, watch } from "vue"
+import { ref, computed, watch, onMounted, onUnmounted } from "vue"
 import { useRoute } from "vue-router"
 import { useI18n } from "vue-i18n"
 import { useLocalePath } from "#imports"
@@ -244,7 +245,7 @@ const localePath = useLocalePath()
 const currentImageIndex = ref(0)
 const lightboxOpen = ref(false)
 
-// ✅ Փոխեք այս տողը - օգտագործեք ձեր backend-ի իրական URL-ը
+// Fetch data
 const { data: car, pending: isPending, refresh } = useFetch(`https://autback.onrender.com/api/cars/${id}/`, {
   query: { lang: locale },
   key: `car-${id}-${locale.value}`,
@@ -255,6 +256,40 @@ const { data: car, pending: isPending, refresh } = useFetch(`https://autback.onr
 watch(locale, () => {
   refresh()
 })
+
+// ===== KEYBOARD NAVIGATION CODE =====
+const handleKeyDown = (event) => {
+  if (!car.value?.images || car.value.images.length <= 1) return
+  
+  switch(event.key) {
+    case 'ArrowRight':
+    case 'd':
+    case 'D':
+      event.preventDefault()
+      nextImage()
+      break
+    case 'ArrowLeft':
+    case 'a':
+    case 'A':
+      event.preventDefault()
+      prevImage()
+      break
+    case 'Escape':
+      if (lightboxOpen.value) {
+        closeLightbox()
+      }
+      break
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown)
+})
+// ===== END KEYBOARD NAVIGATION CODE =====
 
 // Helper function to extract text from multilingual objects
 const extractText = (v, lang) => {
@@ -302,6 +337,7 @@ const currentImage = computed(() => {
 const normalizeValue = (v) => {
   return extractText(v, locale.value)
 }
+
 const getImageUrl = (img) => {
   if (!img) return defaultImage
   if (typeof img === 'string') {
@@ -339,7 +375,7 @@ const getColorHex = (colorName) => {
     'կարմիր': '#e53e3e',
     'կապույտ': '#3182ce',
     'մոխրագույն': '#718096',
-    'արծաթագույն': '#cbd5e0',
+    'արծաղ': '#cbd5e0',
     'կանաչ': '#38a169',
     'դեղին': '#ecc94b',
     'black': '#1a1a1a',
@@ -415,6 +451,7 @@ const contactSeller = () => {
 const makeOffer = () => {
   console.log('Make offer')
 }
+
 </script>
 
 <style scoped>
