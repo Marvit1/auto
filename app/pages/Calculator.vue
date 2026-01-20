@@ -547,8 +547,8 @@ const calculate = () => {
             <select id="age" v-model="values.age" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
               <option value="under3">Under 3 years</option>
-              <option value="from3to7">3-7 years</option>
-              <option value="over7">Over 7 years</option>
+              <option value="from3to7">3-5 years</option>
+              <option value="over7">Over 5 years</option>
             </select>
           </div>
           
@@ -585,7 +585,7 @@ const calculate = () => {
         <div v-if="result" class="results-card">
           <h2 class="results-title">{{ t('calculator.result') }}</h2>
           
-          <div class="results-breakdown">
+         <!--  <div class="results-breakdown">
             <div class="result-item">
               <span class="item-label">{{ t('calculator.carPrice') }}</span>
               <span class="item-value">${{ (parseFloat(values.price) || 0).toFixed(2) }}</span>
@@ -622,7 +622,7 @@ const calculate = () => {
               <span class="item-label">{{ t('calculator.brokerService') }}</span>
               <span class="item-value">${{ result.brokerService.toFixed(2) }}</span>
             </div>
-          </div>
+          </div>-->
           
           <div class="total-card">
             <div class="total-line">
@@ -648,7 +648,8 @@ const calculate = () => {
 
 .calculator-wrapper {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   background-image: url('../../assets/kk.jpg');
+
   padding: 40px 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
