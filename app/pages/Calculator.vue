@@ -618,7 +618,7 @@ const calculate = () => {
 .warning-banner {
   background-color: #fef3c7;
   border-left: 4px solid #f59e0b;
-  margin: 4px;
+  margin: 8px;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 32px;
@@ -628,7 +628,7 @@ const calculate = () => {
   color: #92400e;
   font-size: 0.95rem;
   line-height: 1.6;
-  margin: 2px;
+  margin: 4px;
   font-weight: 500;
 }
 
