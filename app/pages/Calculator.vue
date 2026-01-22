@@ -506,7 +506,7 @@ const calculate = () => {
               <span class="item-label">{{ t('calculator.brokerService') }}</span>
               <span class="item-value">${{ result.brokerService.toFixed(2) }}</span>
             </div>
-          </div>-->
+          </div>
           
           <div class="total-card">
             <div class="total-line">
