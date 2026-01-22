@@ -370,11 +370,7 @@ const calculate = () => {
         <div class="warning-banner">
           <p class="warning-text">
             ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
-
-
           </p>
-          <p>⚠️ Using the appropriate calculator on the website, it will only be possible to get a very rough idea of ​​the customs fees to be charged for the import of a given vehicle.</p>
-          </div>
         </div>
         
         <div class="input-grid">
@@ -466,7 +462,7 @@ const calculate = () => {
           {{ t('calculator.calc') }}
         </button>
 
-       <div v-if="result" class="results-card">
+        <div v-if="result" class="results-card">
           <h2 class="results-title">{{ t('calculator.result') }}</h2>
           
           <div class="results-breakdown">
@@ -520,7 +516,7 @@ const calculate = () => {
         </div>
       </div>
     </div>
-  
+  </div>
 </template>
 
 <style scoped>

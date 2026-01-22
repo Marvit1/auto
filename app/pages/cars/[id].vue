@@ -227,40 +227,351 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from "vue"
 import { useRoute } from "vue-router"
 import { useI18n } from "vue-i18n"
-import { useLocalePath } from "#imports"
-import { useFetch } from "#imports"
+import { useLocalePath, useFetch, useHead, useAsyncData } from "#imports"
 
 const defaultImage = '/aa.jpg'
 const route = useRoute()
-const id = route.params.id
+const id = route.params.id as string
 const i18nAll = useI18n({ useScope: 'global' })
 const { t, locale } = i18nAll
 const localePath = useLocalePath()
+const config = useRuntimeConfig()
 
 // State
 const currentImageIndex = ref(0)
 const lightboxOpen = ref(false)
 
-// Fetch data
-const { data: car, pending: isPending, refresh } = useFetch(`https://autback.onrender.com/api/cars/${id}/`, {
-  query: { lang: locale },
-  key: `car-${id}-${locale.value}`,
-  server: false
+// ============ HELPER FUNCTIONS ============
+
+const extractText = (v: any, lang: string): string => {
+  if (v === null || v === undefined) return ''
+  if (typeof v === 'string') return v
+  if (Array.isArray(v)) {
+    for (const itm of v) {
+      const t = extractText(itm, lang)
+      if (t) return t
+    }
+    return ''
+  }
+  if (typeof v === 'object') {
+    if (lang && Object.prototype.hasOwnProperty.call(v, lang) && typeof v[lang] === 'string') {
+      return v[lang]
+    }
+    for (const k of ['name', 'label', 'title', 'text', 'content', 'html', 'value']) {
+      if (Object.prototype.hasOwnProperty.call(v, k) && typeof v[k] === 'string') {
+        return v[k]
+      }
+    }
+    for (const key in v) {
+      if (Object.prototype.hasOwnProperty.call(v, key)) {
+        const t = extractText(v[key], lang)
+        if (t) return t
+      }
+    }
+    return ''
+  }
+  return String(v)
+}
+
+const normalizeValue = (v: any): string => {
+  return extractText(v, locale.value)
+}
+
+const getImageUrl = (img: any): string => {
+  if (!img) return defaultImage
+  if (typeof img === 'string') {
+    if (img.startsWith('/media/') || img.startsWith('media/')) {
+      return `https://autback.onrender.com${img.startsWith('/') ? img : '/' + img}`
+    }
+    return img
+  }
+  if (img.url) return img.url
+  if (img.src) return img.src
+  if (img.image) return getImageUrl(img.image)
+  return defaultImage
+}
+
+const formatPrice = (price: number): string => {
+  if (!price) return '$0'
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price)
+}
+
+const formatPriceNum = (price: number): string => {
+  if (!price) return '0'
+  return Math.floor(price).toString()
+}
+
+const formatMileage = (mileage: number): string => {
+  if (!mileage) return '0 miles'
+  return `${new Intl.NumberFormat('en-US').format(mileage)} miles`
+}
+
+const formatMileageNum = (mileage: number): string => {
+  if (!mileage) return '0'
+  return Math.floor(mileage).toString()
+}
+
+const getColorHex = (colorName: any): string => {
+  if (!colorName) return '#667eea'
+  const colorMap: Record<string, string> = {
+    'սև': '#1a1a1a',
+    'սպիտակ': '#f5f5f5',
+    'կարմիր': '#e53e3e',
+    'կապույտ': '#3182ce',
+    'մոխրագույն': '#718096',
+    'արծաղ': '#cbd5e0',
+    'կանաչ': '#38a169',
+    'դեղին': '#ecc94b',
+    'black': '#1a1a1a',
+    'white': '#f5f5f5',
+    'red': '#e53e3e',
+    'blue': '#3182ce',
+    'gray': '#718096',
+    'silver': '#cbd5e0',
+    'green': '#38a169',
+    'yellow': '#ecc94b'
+  }
+  const normalized = normalizeValue(colorName)
+  return colorMap[normalized?.toLowerCase()] || '#667eea'
+}
+
+const getStatusClass = (status: string): string => {
+  switch (status) {
+    case 'armenia': return 'status-armenia'
+    case 'transit': return 'status-transit'
+    case 'auction': return 'status-auction'
+    default: return ''
+  }
+}
+
+const getStatusText = (status: string): string => {
+  switch (status) {
+    case 'armenia': return 'Հայաստանում'
+    case 'transit': return 'Տրանզիտ'
+    case 'auction': return 'Աճուրդ'
+    default: return ''
+  }
+}
+
+// ============ FETCH DATA WITH SSR SUPPORT ============
+
+const { data: car, pending, error, refresh } = await useAsyncData(
+  `car-${id}-${locale.value}`,
+  async () => {
+    try {
+      const response = await $fetch(
+        `https://autback.onrender.com/api/cars/${id}/`,
+        {
+          query: { lang: locale.value }
+        }
+      )
+      return response
+    } catch (err: any) {
+      console.error('Fetch error:', err)
+      return null
+    }
+  },
+  {
+    watch: [locale],
+    server: true
+  }
+)
+
+// ============ COMPUTED PROPERTIES ============
+
+const hasMultipleImages = computed(() => {
+  return car.value?.images && car.value.images.length > 1
 })
 
-// Watch for locale changes
-watch(locale, () => {
-  refresh()
+const currentImage = computed(() => {
+  if (!car.value?.images || car.value.images.length === 0) {
+    return defaultImage
+  }
+  return getImageUrl(car.value.images[currentImageIndex.value]?.image)
 })
 
-// ===== KEYBOARD NAVIGATION CODE =====
-const handleKeyDown = (event) => {
+const carTitle = computed(() => {
+  if (!car.value) return 'AutoSwift'
+  return `${normalizeValue(car.value.make)} ${normalizeValue(car.value.model)} (${car.value.year})`
+})
+
+const carDescription = computed(() => {
+  if (!car.value) return 'AutoSwift - ավտոմեքենաների խանութ'
+  return `Գինը: $${formatPriceNum(car.value.price)} | Վազքային: ${formatMileageNum(car.value.mileage)} մղ | ${normalizeValue(car.value.fuel)}`
+})
+
+const carImage = computed(() => {
+  if (!car.value?.images || car.value.images.length === 0) {
+    return `${config.public.baseUrl}${defaultImage}`
+  }
+  const imgUrl = getImageUrl(car.value.images[0].image)
+  if (!imgUrl.startsWith('http')) {
+    return `https://autback.onrender.com${imgUrl}`
+  }
+  return imgUrl
+})
+
+const fullUrl = computed(() => {
+  return `${config.public.baseUrl}/cars/${id}`
+})
+
+// ============ SET META TAGS ============
+
+watch([car, locale], () => {
+  if (!car.value) return
+
+  useHead({
+    title: carTitle.value,
+    link: [
+      {
+        rel: 'canonical',
+        href: fullUrl.value
+      }
+    ],
+    meta: [
+      {
+        name: 'description',
+        content: carDescription.value
+      },
+      {
+        name: 'keywords',
+        content: `${normalizeValue(car.value.make)}, ${normalizeValue(car.value.model)}, ${car.value.year}, ավտոմեքենա`
+      },
+      // ✅ FACEBOOK / OPEN GRAPH
+      {
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        property: 'og:title',
+        content: carTitle.value
+      },
+      {
+        property: 'og:description',
+        content: carDescription.value
+      },
+      {
+        property: 'og:image',
+        content: carImage.value
+      },
+      {
+        property: 'og:image:width',
+        content: '1200'
+      },
+      {
+        property: 'og:image:height',
+        content: '630'
+      },
+      {
+        property: 'og:image:type',
+        content: 'image/jpeg'
+      },
+      {
+        property: 'og:image:alt',
+        content: carTitle.value
+      },
+      {
+        property: 'og:url',
+        content: fullUrl.value
+      },
+      {
+        property: 'og:site_name',
+        content: 'AutoSwift'
+      },
+      {
+        property: 'og:locale',
+        content: 'hy_AM'
+      },
+      // ✅ PRODUCT
+      {
+        property: 'product:price:amount',
+        content: formatPriceNum(car.value.price)
+      },
+      {
+        property: 'product:price:currency',
+        content: 'USD'
+      },
+      {
+        property: 'product:availability',
+        content: car.value.status === 'armenia' ? 'in stock' : 'out of stock'
+      },
+      // ✅ TWITTER
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image'
+      },
+      {
+        name: 'twitter:title',
+        content: carTitle.value
+      },
+      {
+        name: 'twitter:description',
+        content: carDescription.value
+      },
+      {
+        name: 'twitter:image',
+        content: carImage.value
+      }
+    ]
+  })
+}, { immediate: true })
+
+// ============ IMAGE NAVIGATION ============
+
+const nextImage = () => {
+  if (!hasMultipleImages.value) return
+  currentImageIndex.value = (currentImageIndex.value + 1) % car.value.images.length
+}
+
+const prevImage = () => {
+  if (!hasMultipleImages.value) return
+  currentImageIndex.value = (currentImageIndex.value - 1 + car.value.images.length) % car.value.images.length
+}
+
+const openLightbox = () => {
+  if (hasMultipleImages.value) {
+    lightboxOpen.value = true
+  }
+}
+
+const closeLightbox = () => {
+  lightboxOpen.value = false
+}
+
+// ============ ACTIONS ============
+
+const shareProduct = () => {
+  if (navigator.share && car.value) {
+    navigator.share({
+      title: carTitle.value,
+      text: `Check out this car: ${carTitle.value}`,
+      url: window.location.href
+    }).catch(err => console.log('Error sharing:', err))
+  }
+}
+
+const contactSeller = () => {
+  console.log('Contact seller')
+}
+
+const makeOffer = () => {
+  console.log('Make offer')
+}
+
+// ============ KEYBOARD NAVIGATION ============
+
+const handleKeyDown = (event: KeyboardEvent) => {
   if (!car.value?.images || car.value.images.length <= 1) return
-  
+
   switch(event.key) {
     case 'ArrowRight':
     case 'd':
@@ -289,169 +600,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeyDown)
 })
-// ===== END KEYBOARD NAVIGATION CODE =====
-
-// Helper function to extract text from multilingual objects
-const extractText = (v, lang) => {
-  if (v === null || v === undefined) return ''
-  if (typeof v === 'string') return v
-  if (Array.isArray(v)) {
-    for (const itm of v) {
-      const t = extractText(itm, lang)
-      if (t) return t
-    }
-    return ''
-  }
-  if (typeof v === 'object') {
-    // prefer language-specific key
-    if (lang && Object.prototype.hasOwnProperty.call(v, lang) && typeof v[lang] === 'string') return v[lang]
-    // common candidate keys
-    for (const k of ['name', 'label', 'title', 'text', 'content', 'html', 'value']) {
-      if (Object.prototype.hasOwnProperty.call(v, k) && typeof v[k] === 'string') return v[k]
-    }
-    // fallback: recurse into children
-    for (const key in v) {
-      if (Object.prototype.hasOwnProperty.call(v, key)) {
-        const t = extractText(v[key], lang)
-        if (t) return t
-      }
-    }
-    return ''
-  }
-  return String(v)
-}
-
-// Computed properties
-const hasMultipleImages = computed(() => {
-  return car.value?.images && car.value.images.length > 1
-})
-
-const currentImage = computed(() => {
-  if (!car.value?.images || car.value.images.length === 0) {
-    return defaultImage
-  }
-  return getImageUrl(car.value.images[currentImageIndex.value]?.image)
-})
-
-// Helper functions
-const normalizeValue = (v) => {
-  return extractText(v, locale.value)
-}
-
-const getImageUrl = (img) => {
-  if (!img) return defaultImage
-  if (typeof img === 'string') {
-    if (img.startsWith('/media/') || img.startsWith('media/')) {
-      return `https://autback.onrender.com${img.startsWith('/') ? img : '/' + img}`
-    }
-    return img
-  }
-  if (img.url) return img.url
-  if (img.src) return img.src
-  if (img.image) return getImageUrl(img.image)
-  return defaultImage
-}
-
-const formatPrice = (price) => {
-  if (!price) return '$0'
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  }).format(price)
-} 
-
-const formatMileage = (mileage) => {
-  if (!mileage) return '0 miles'
-  return `${new Intl.NumberFormat('en-US').format(mileage)} miles`
-}
-
-const getColorHex = (colorName) => {
-  if (!colorName) return '#667eea'
-  const colorMap = {
-    'սև': '#1a1a1a',
-    'սպիտակ': '#f5f5f5',
-    'կարմիր': '#e53e3e',
-    'կապույտ': '#3182ce',
-    'մոխրագույն': '#718096',
-    'արծաղ': '#cbd5e0',
-    'կանաչ': '#38a169',
-    'դեղին': '#ecc94b',
-    'black': '#1a1a1a',
-    'white': '#f5f5f5',
-    'red': '#e53e3e',
-    'blue': '#3182ce',
-    'gray': '#718096',
-    'silver': '#cbd5e0',
-    'green': '#38a169',
-    'yellow': '#ecc94b'
-  }
-  const normalized = normalizeValue(colorName)
-  return colorMap[normalized?.toLowerCase()] || '#667eea'
-}
-
-const getStatusClass = (status) => {
-  switch (status) {
-    case 'armenia': return 'status-armenia'
-    case 'transit': return 'status-transit'
-    case 'auction': return 'status-auction'
-    default: return ''
-  }
-}
-
-const getStatusText = (status) => {
-  switch (status) {
-    case 'armenia': return t('carDetail.statusArmenia')
-    case 'transit': return t('carDetail.statusTransit')
-    case 'auction': return t('carDetail.statusAuction')
-    default: return ''
-  }
-}
-
-// Image navigation
-const nextImage = () => {
-  if (!hasMultipleImages.value) return
-  currentImageIndex.value = (currentImageIndex.value + 1) % car.value.images.length
-}
-
-const prevImage = () => {
-  if (!hasMultipleImages.value) return
-  currentImageIndex.value = (currentImageIndex.value - 1 + car.value.images.length) % car.value.images.length
-}
-
-// Lightbox controls
-const openLightbox = () => {
-  if (hasMultipleImages.value) {
-    lightboxOpen.value = true
-  }
-}
-
-const closeLightbox = () => {
-  lightboxOpen.value = false
-}
-
-// Actions
-const shareProduct = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: `${normalizeValue(car.value.make)} ${normalizeValue(car.value.model)}`,
-      text: `Check out this car: ${normalizeValue(car.value.make)} ${normalizeValue(car.value.model)}`,
-      url: window.location.href
-    }).catch(err => console.log('Error sharing:', err))
-  } else {
-    console.log('Share not supported')
-  }
-}
-
-const contactSeller = () => {
-  console.log('Contact seller')
-}
-
-const makeOffer = () => {
-  console.log('Make offer')
-}
-
 </script>
 
 <style scoped>
