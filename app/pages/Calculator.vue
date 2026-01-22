@@ -469,8 +469,8 @@ const calculate = () => {
         <div v-if="result" class="results-card">
           <h2 class="results-title">{{ t('calculator.result') }}</h2>
           
-          <div class="results-breakdown">
-            <!--<div class="result-item">
+         <!-- <div class="results-breakdown">
+            <div class="result-item">
               <span class="item-label">{{ t('calculator.carPrice') }}</span>
               <span class="item-value">${{ (parseFloat(values.price) || 0).toFixed(2) }}</span>
             </div>-->
@@ -505,8 +505,8 @@ const calculate = () => {
            <!--<div class="result-item">
               <span class="item-label">{{ t('calculator.brokerService') }}</span>
               <span class="item-value">${{ result.brokerService.toFixed(2) }}</span>
-            </div>-->
-          </div>
+            </div>
+          </div>-->
           
           <div class="total-card">
             <div class="total-line">
