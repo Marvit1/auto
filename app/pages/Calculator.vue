@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 interface FormValues {
   price: string;
-  auction: string;
+  auction: 'copart' | 'iaai' | '';
   auctionLocation: string;
   shipping: string;
   origin: 'eaeu' | 'noneaeu' | '';
@@ -43,180 +43,250 @@ const values = ref<FormValues>({
 
 const result = ref<CalculationResult | null>(null);
 
-const getShippingCostByLocation = (location: string): number => {
-  const norm = location
-    .toUpperCase()
-    .replace(/,/g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/-\s+/g, '-')
-    .replace(/\s+-/g, '-')
-    .trim();
+// COPART LOCATIONS
+const copartLocations: Record<string, number> = {
+  "Copart AL - Tanner": 2390,
+  "Copart AL - Montgomery": 2390,
+  "Copart AL - Birmingham": 2390,
+  "Copart AL - Mobile": 2390,
+  "Copart AL - Dothan": 2370,
+  "Copart AL - Mobile South": 2380,
+  "Copart AZ - Tucson": 3080,
+  "Copart AZ - Phoenix": 3020,
+  "Copart AZ - Phoenix North": 3020,
+  "Copart CA - Antelope": 3055,
+  "Copart CA - Long Beach": 2830,
+  "Copart CA - Sun Valley": 2830,
+  "Copart CA - Van Nuys": 2880,
+  "Copart CA - Vallejo": 3005,
+  "Copart CA - San Jose": 3005,
+  "Copart CA - San Diego": 2970,
+  "Copart CA - Sacramento": 3030,
+  "Copart CA - Rancho Cucamonga": 2890,
+  "Copart CA - Martinez": 3005,
+  "Copart CA - Los Angeles": 2880,
+  "Copart CA - Hayward": 3030,
+  "Copart CA - Fresno": 2980,
+  "Copart CA - San Bernardino": 2850,
+  "Copart CA - Bakersfield": 2905,
+  "Copart CA - Redding": 3165,
+  "Copart CA - Adelanto": 2840,
+  "Copart CA - Mentone": 2880,
+  "Copart CA - So Sacramento": 3030,
+  "Copart CA - Napa": 3090,
+  "Copart CO - Denver": 2830,
+  "Copart CO - Denver South": 2830,
+  "Copart CO - Colorado Springs": 2820,
+  "Copart CO - Denver Central": 2830,
+  "Copart CT - Hartford Springfield": 2355,
+  "Copart CT - Hartford": 2280,
+  "Copart DE - Seaford": 2355,
+  "Copart FL - Orlando North": 2180,
+  "Copart FL - Miami Central": 2280,
+  "Copart FL - West Palm Beach": 2280,
+  "Copart FL - Tampa South": 2280,
+  "Copart FL - Miami North": 2280,
+  "Copart FL - Orlando South": 2280,
+  "Copart FL - Ocala": 2280,
+  "Copart FL - Tallahassee": 2480,
+  "Copart FL - Miami South": 2280,
+  "Copart FL - Ft. Pierce": 2180,
+  "Copart FL - Punta Gorda South": 2430,
+  "Copart FL - Jacksonville North": 2230,
+  "Copart GA - Macon": 2410,
+  "Copart GA - Cartersville": 2310,
+  "Copart GA - Tifton": 2350,
+  "Copart GA - Savannah": 2270,
+  "Copart GA - Atlanta East": 2330,
+  "Copart GA - Atlanta North": 2280,
+  "Copart GA - Atlanta South": 2470,
+  "Copart GA - Atlanta West": 2330,
+  "Copart GA - Fairburn": 2420,
+  "Copart GA - Augusta": 2330,
+  "Copart IL - Chicago North": 2580,
+  "Copart IL - Chicago South": 2580,
+  "Copart IN - Indianapolis": 2580,
+  "Copart IN - Fort Wayne": 2580,
+  "Copart IA - Des Moines": 2630,
+  "Copart LA - New Orleans": 2280,
+  "Copart MA - Boston": 2305,
+  "Copart MI - Detroit": 2530,
+  "Copart MN - Minneapolis": 2680,
+  "Copart MS - Jackson": 2350,
+  "Copart MO - Kansas City": 2530,
+  "Copart MO - St. Louis": 2480,
+  "Copart NV - Las Vegas": 3030,
+  "Copart NJ - Central": 2230,
+  "Copart NJ - South": 2230,
+  "Copart NM - Albuquerque": 3080,
+  "Copart NY - Buffalo": 2490,
+  "Copart NY - Newburgh": 2280,
+  "Copart NY - Rochester": 2405,
+  "Copart NY - Syracuse": 2330,
+  "Copart NY - Long Island": 2280,
+  "Copart NY - Albany": 2305,
+  "Copart NC - Charlotte": 2330,
+  "Copart NC - Raleigh": 2280,
+  "Copart OH - Columbus": 2480,
+  "Copart OH - Cleveland": 2530,
+  "Copart PA - Philadelphia": 2230,
+  "Copart PA - Pittsburgh": 2380,
+  "Copart SC - Columbia": 2280,
+  "Copart TN - Nashville": 2380,
+  "Copart TN - Memphis": 2330,
+  "Copart TX - Waco": 2430,
+  "Copart TX - Andrews": 2655,
+  "Copart TX - San Antonio": 2480,
+  "Copart TX - Dallas South": 2430,
+  "Copart TX - Austin": 2430,
+  "Copart TX - McAllen": 2460,
+  "Copart TX - Lufkin": 2430,
+  "Copart TX - Longview": 2440,
+  "Copart TX - Houston": 2330,
+  "Copart TX - Ft. Worth": 2470,
+  "Copart TX - Dallas": 2430,
+  "Copart TX - Corpus Christi": 2440,
+  "Copart TX - El Paso": 2655,
+  "Copart TX - Amarillo": 2680,
+  "Copart TX - Abilene": 2530,
+  "Copart TX - Houston East": 2330,
+  "Copart UT - Salt Lake City": 3130,
+  "Copart VA - Richmond": 2280,
+  "Copart WA - Seattle": 3155,
+  "Copart WI - Milwaukee": 2630,
+};
 
-  const prices: Record<string, number> = {
-    // COPART
-    "COPART AL - TANNER": 2390,
-    "COPART AL - MONTGOMERY": 2390,
-    "COPART AL - BIRMINGHAM": 2390,
-    "COPART AL - MOBILE": 2390,
-    "COPART AL - DOTHAN": 2370,
-    "COPART AL - MOBILE SOUTH": 2380,
-    "COPART AZ - TUCSON": 3080,
-    "COPART AZ - PHOENIX": 3020,
-    "COPART AZ - PHOENIX NORTH": 3020,
-    "COPART CA - ANTELOPE": 3055,
-    "COPART CA - LONG BEACH": 2830,
-    "COPART CA - SUN VALLEY": 2830,
-    "COPART CA - VAN NUYS": 2880,
-    "COPART CA - VALLEJO": 3005,
-    "COPART CA - SAN JOSE": 3005,
-    "COPART CA - SAN DIEGO": 2970,
-    "COPART CA - SACRAMENTO": 3030,
-    "COPART CA - RANCHO CUCAMONGA": 2890,
-    "COPART CA - MARTINEZ": 3005,
-    "COPART CA - LOS ANGELES": 2880,
-    "COPART CA - HAYWARD": 3030,
-    "COPART CA - FRESNO": 2980,
-    "COPART CA - SAN BERNARDINO": 2850,
-    "COPART CA - BAKERSFIELD": 2905,
-    "COPART CA - REDDING": 3165,
-    "COPART CA - ADELANTO": 2840,
-    "COPART CA - MENTONE": 2880,
-    "COPART CA - SO SACRAMENTO": 3030,
-    "COPART CA - NAPA": 3090,
-    "COPART CO - DENVER": 2830,
-    "COPART CO - DENVER SOUTH": 2830,
-    "COPART CO - COLORADO SPRINGS": 2820,
-    "COPART CO - DENVER CENTRAL": 2830,
-    "COPART CT - HARTFORD SPRINGFIELD": 2355,
-    "COPART CT - HARTFORD": 2280,
-    "COPART DE - SEAFORD": 2355,
-    "COPART FL - ORLANDO NORTH": 2180,
-    "COPART FL - MIAMI CENTRAL": 2280,
-    "COPART FL - WEST PALM BEACH": 2280,
-    "COPART FL - TAMPA SOUTH": 2280,
-    "COPART FL - MIAMI NORTH": 2280,
-    "COPART FL - ORLANDO SOUTH": 2280,
-    "COPART FL - OCALA": 2280,
-    "COPART FL - TALLAHASSEE": 2480,
-    "COPART FL - MIAMI SOUTH": 2280,
-    "COPART FL - FT. PIERCE": 2180,
-    "COPART FL - PUNTA GORDA SOUTH": 2430,
-    "COPART FL - JACKSONVILLE NORTH": 2230,
-    "COPART GA - MACON": 2410,
-    "COPART GA - CARTERSVILLE": 2310,
-    "COPART GA - TIFTON": 2350,
-    "COPART GA - SAVANNAH": 2270,
-    "COPART GA - ATLANTA EAST": 2330,
-    "COPART GA - ATLANTA NORTH": 2280,
-    "COPART GA - ATLANTA SOUTH": 2470,
-    "COPART GA - ATLANTA WEST": 2330,
-    "COPART GA - FAIRBURN": 2420,
-    "COPART GA - AUGUSTA": 2330,
-    "COPART TX - WACO": 2430,
-    "COPART TX - ANDREWS": 2655,
-    "COPART TX - SAN ANTONIO": 2480,
-    "COPART TX - DALLAS SOUTH": 2430,
-    "COPART TX - AUSTIN": 2430,
-    "COPART TX - MCALLEN": 2460,
-    "COPART TX - LUFKIN": 2430,
-    "COPART TX - LONGVIEW": 2440,
-    "COPART TX - HOUSTON": 2330,
-    "COPART TX - FT. WORTH": 2470,
-    "COPART TX - DALLAS": 2430,
-    "COPART TX - CORPUS CHRISTI": 2440,
-    "COPART TX - EL PASO": 2655,
-    "COPART TX - AMARILLO": 2680,
-    "COPART TX - ABILENE": 2530,
-    "COPART TX - HOUSTON EAST": 2330,
-    "COPART NY - BUFFALO": 2490,
-    "COPART NY - NEWBURGH": 2280,
-    "COPART NY - ROCHESTER": 2405,
-    "COPART NY - SYRACUSE": 2330,
-    "COPART NY - LONG ISLAND": 2280,
-    "COPART NY - ALBANY": 2305,
-    // IAAI
-    "IAAI TUCSON (AZ)": 3080,
-    "IAAI PHOENIX (AZ)": 3020,
-    "IAAI ACE - CARSON (CA)": 2870,
-    "IAAI ACE - PERRIS (CA)": 2940,
-    "IAAI SAN DIEGO (CA)": 2970,
-    "IAAI SACRAMENTO (CA)": 3005,
-    "IAAI NORTH HOLLYWOOD (CA)": 2870,
-    "IAAI HIGH DESERT (CA)": 2930,
-    "IAAI LOS ANGELES (CA)": 2870,
-    "IAAI FRESNO (CA)": 2980,
-    "IAAI FREMONT (CA)": 3005,
-    "IAAI FONTANA (CA)": 2850,
-    "IAAI COLTON (CA)": 2840,
-    "IAAI EAST BAY (CA)": 3005,
-    "IAAI ANAHEIM (CA)": 2830,
-    "IAAI LOS ANGELES SOUTH (CA)": 2870,
-    "IAAI SANTA CLARITA (CA)": 2880,
-    "IAAI RIVERSIDE (CA)": 2860,
-    "IAAI STOCKTON (CA)": 3130,
-    "IAAI WESTERN COLORADO (CO)": 3210,
-    "IAAI DENVER EAST (CO)": 2780,
-    "IAAI COLORADO SPRINGS (CO)": 4130,
-    "IAAI TAMPA NORTH (FL)": 2280,
-    "IAAI ORLANDO-NORTH (FL)": 2230,
-    "IAAI MIAMI-NORTH (FL)": 2230,
-    "IAAI TAMPA (FL)": 2230,
-    "IAAI ORLANDO (FL)": 2230,
-    "IAAI PENSACOLA (FL)": 2330,
-    "IAAI JACKSONVILLE (FL)": 2230,
-    "IAAI FORT PIERCE (FL)": 2180,
-    "IAAI CLEARWATER (FL)": 2250,
-    "IAAI FORT MYERS (FL)": 2460,
-    "IAAI WEST PALM BEACH (FL)": 2280,
-    "IAAI MACON (GA)": 2280,
-    "IAAI ATLANTA EAST (GA)": 2330,
-    "IAAI TIFTON (GA)": 2290,
-    "IAAI SAVANNAH (GA)": 2130,
-    "IAAI ATLANTA (GA)": 2330,
-    "IAAI CHICAGO-NORTH (IL)": 2580,
-    "IAAI CHICAGO-SOUTH (IL)": 2580,
-    "IAAI CHICAGO-WEST (IL)": 2530,
-    "IAAI INDIANAPOLIS (IN)": 2580,
-    "IAAI FORT WAYNE (IN)": 2580,
-    "IAAI SOUTHERN NEW JERSEY (NJ)": 2230,
-    "IAAI CENTRAL NEW JERSEY (NJ)": 2180,
-    "IAAI AVENEL NEW JERSEY (NJ)": 2180,
-    "IAAI STATEN ISLAND (NY)": 2280,
-    "IAAI ALBANY (NY)": 2305,
-    "IAAI NEWBURGH (NY)": 2280,
-    "IAAI ROCHESTER (NY)": 2405,
-    "IAAI LONG ISLAND (NY)": 2280,
-    "IAAI SYRACUSE (NY)": 2480,
-    "IAAI BUFFALO (NY)": 2480,
-    "IAAI HOUSTON SOUTH (TX)": 2380,
-    "IAAI FORT WORTH NORTH (TX)": 2470,
-    "IAAI HOUSTON-NORTH (TX)": 2380,
-    "IAAI DALLAS (TX)": 2430,
-    "IAAI SAN ANTONIO-SOUTH (TX)": 2480,
-    "IAAI MCALLEN (TX)": 2480,
-    "IAAI LUBBOCK (TX)": 2630,
-    "IAAI LONGVIEW (TX)": 2470,
-    "IAAI HOUSTON (TX)": 2380,
-    "IAAI EL PASO (TX)": 2680,
-    "IAAI AUSTIN (TX)": 2440,
-    "IAAI AMARILLO (TX)": 2680,
-  };
+// IAAI LOCATIONS
+const iaaiLocations: Record<string, number> = {
+  "IAAI Tucson (AZ)": 3080,
+  "IAAI Phoenix (AZ)": 3020,
+  "IAAI ACE - Carson (CA)": 2870,
+  "IAAI ACE - Perris (CA)": 2940,
+  "IAAI San Diego (CA)": 2970,
+  "IAAI Sacramento (CA)": 3005,
+  "IAAI North Hollywood (CA)": 2870,
+  "IAAI High Desert (CA)": 2930,
+  "IAAI Los Angeles (CA)": 2870,
+  "IAAI Fresno (CA)": 2980,
+  "IAAI Fremont (CA)": 3005,
+  "IAAI Fontana (CA)": 2850,
+  "IAAI Colton (CA)": 2840,
+  "IAAI East Bay (CA)": 3005,
+  "IAAI Anaheim (CA)": 2830,
+  "IAAI Los Angeles South (CA)": 2870,
+  "IAAI Santa Clarita (CA)": 2880,
+  "IAAI Riverside (CA)": 2860,
+  "IAAI Stockton (CA)": 3130,
+  "IAAI Western Colorado (CO)": 3210,
+  "IAAI Denver East (CO)": 2780,
+  "IAAI Colorado Springs (CO)": 4130,
+  "IAAI Hartford (CT)": 2280,
+  "IAAI Seaford (DE)": 2355,
+  "IAAI Tampa North (FL)": 2280,
+  "IAAI Orlando-North (FL)": 2230,
+  "IAAI Miami-North (FL)": 2230,
+  "IAAI Tampa (FL)": 2230,
+  "IAAI Orlando (FL)": 2230,
+  "IAAI Pensacola (FL)": 2330,
+  "IAAI Jacksonville (FL)": 2230,
+  "IAAI Fort Pierce (FL)": 2180,
+  "IAAI Clearwater (FL)": 2250,
+  "IAAI Fort Myers (FL)": 2460,
+  "IAAI West Palm Beach (FL)": 2280,
+  "IAAI Macon (GA)": 2280,
+  "IAAI Atlanta East (GA)": 2330,
+  "IAAI Tifton (GA)": 2290,
+  "IAAI Savannah (GA)": 2130,
+  "IAAI Atlanta (GA)": 2330,
+  "IAAI Chicago-North (IL)": 2580,
+  "IAAI Chicago-South (IL)": 2580,
+  "IAAI Chicago-West (IL)": 2530,
+  "IAAI Indianapolis (IN)": 2580,
+  "IAAI Fort Wayne (IN)": 2580,
+  "IAAI Des Moines (IA)": 2630,
+  "IAAI New Orleans (LA)": 2280,
+  "IAAI Boston (MA)": 2305,
+  "IAAI Detroit (MI)": 2530,
+  "IAAI Minneapolis (MN)": 2680,
+  "IAAI Jackson (MS)": 2350,
+  "IAAI Kansas City (MO)": 2530,
+  "IAAI St. Louis (MO)": 2480,
+  "IAAI Las Vegas (NV)": 3030,
+  "IAAI Southern New Jersey (NJ)": 2230,
+  "IAAI Central New Jersey (NJ)": 2180,
+  "IAAI Avenel New Jersey (NJ)": 2180,
+  "IAAI Albuquerque (NM)": 3080,
+  "IAAI Staten Island (NY)": 2280,
+  "IAAI Albany (NY)": 2305,
+  "IAAI Newburgh (NY)": 2280,
+  "IAAI Rochester (NY)": 2405,
+  "IAAI Long Island (NY)": 2280,
+  "IAAI Syracuse (NY)": 2480,
+  "IAAI Buffalo (NY)": 2480,
+  "IAAI Charlotte (NC)": 2330,
+  "IAAI Raleigh (NC)": 2280,
+  "IAAI Columbus (OH)": 2480,
+  "IAAI Cleveland (OH)": 2530,
+  "IAAI Philadelphia (PA)": 2230,
+  "IAAI Pittsburgh (PA)": 2380,
+  "IAAI Columbia (SC)": 2280,
+  "IAAI Nashville (TN)": 2380,
+  "IAAI Memphis (TN)": 2330,
+  "IAAI Houston South (TX)": 2380,
+  "IAAI Fort Worth North (TX)": 2470,
+  "IAAI Houston-North (TX)": 2380,
+  "IAAI Dallas (TX)": 2430,
+  "IAAI San Antonio-South (TX)": 2480,
+  "IAAI McAllen (TX)": 2480,
+  "IAAI Lubbock (TX)": 2630,
+  "IAAI Longview (TX)": 2470,
+  "IAAI Houston (TX)": 2380,
+  "IAAI El Paso (TX)": 2680,
+  "IAAI Austin (TX)": 2440,
+  "IAAI Amarillo (TX)": 2680,
+  "IAAI Salt Lake City (UT)": 3130,
+  "IAAI Richmond (VA)": 2280,
+  "IAAI Seattle (WA)": 3155,
+  "IAAI Milwaukee (WI)": 2630,
+};
 
-  return prices[norm] ?? 2500;
+const portToGumriCost = 350;
+
+const availableLocations = computed(() => {
+  if (values.value.auction === 'copart') {
+    return Object.keys(copartLocations).sort();
+  } else if (values.value.auction === 'iaai') {
+    return Object.keys(iaaiLocations).sort();
+  }
+  return [];
+});
+
+const getShippingCost = (location: string): number => {
+  if (values.value.auction === 'copart') {
+    return (copartLocations[location] || 2500) + portToGumriCost;
+  } else if (values.value.auction === 'iaai') {
+    return (iaaiLocations[location] || 2500) + portToGumriCost;
+  }
+  return 2500 + portToGumriCost;
 };
 
 watch(() => values.value.auctionLocation, (newLocation) => {
   if (newLocation) {
-    const autoShippingCost = getShippingCostByLocation(newLocation);
+    const autoShippingCost = getShippingCost(newLocation);
     values.value.shipping = autoShippingCost.toString();
   }
+});
+
+watch(() => values.value.auction, () => {
+  values.value.auctionLocation = '';
+  values.value.shipping = '';
 });
 
 const calculate = () => {
   const price = parseFloat(values.value.price) || 0;
   const shippingCost = values.value.shipping 
     ? parseFloat(values.value.shipping) 
-    : getShippingCostByLocation(values.value.auctionLocation);
+    : getShippingCost(values.value.auctionLocation);
   
   let auctionFee = 0;
   if (price > 0) {
@@ -262,7 +332,7 @@ const calculate = () => {
   const vatBase = price + shipping + insurance + customs + ecoTax;
   const vat = vatBase * 0.20;
   
-  const total = price + auctionFee + shipping + insurance + broker + customs + vat + ecoTax + brokerService;
+  const total = price + auctionFee + shipping + insurance + broker + customs + vat + ecoTax + brokerService + 1100;
   const totalAMD = total * 400;
   
   result.value = {
@@ -296,6 +366,16 @@ const calculate = () => {
           <h1 class="calculator-title">{{ t('calculator.title') }}</h1>
           <p class="calculator-subtitle">{{ t('calculator.subtitle') }}</p>
         </div>
+
+        <div class="warning-banner">
+          <p class="warning-text">
+            ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
+
+
+          </p>
+          <p>⚠️ Using the appropriate calculator on the website, it will only be possible to get a very rough idea of ​​the customs fees to be charged for the import of a given vehicle.</p>
+          </div>
+        </div>
         
         <div class="input-grid">
           <div class="form-group">
@@ -308,237 +388,41 @@ const calculate = () => {
             <select id="auction" v-model="values.auction" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
               <option value="copart">Copart</option>
-              <option value="iaa">IAA</option>
-              <option value="manheim">Manheim</option>
+              <option value="iaai">IAAI</option>
             </select>
           </div>
           
           <div class="form-group">
             <label class="form-label" for="auctionLocation">{{ t('calculator.auctionLocation') }}</label>
-            <select id="auctionLocation" v-model="values.auctionLocation" class="form-field" style="max-height: 300px; overflow-y: auto;">
+            <select id="auctionLocation" v-model="values.auctionLocation" class="form-field" :disabled="!values.auction" style="max-height: 300px; overflow-y: auto;">
               <option value="">{{ t('calculator.select') }}</option>
-              
-              <!-- COPART LOCATIONS -->
-              <optgroup label="Copart - Alabama">
-                <option>Copart AL - Tanner</option>
-                <option>Copart AL - Montgomery</option>
-                <option>Copart AL - Birmingham</option>
-                <option>Copart AL - Mobile</option>
-                <option>Copart AL - Dothan</option>
-                <option>Copart AL - Mobile South</option>
-              </optgroup>
-
-              <optgroup label="Copart - Arizona">
-                <option>Copart AZ - Tucson</option>
-                <option>Copart AZ - Phoenix</option>
-                <option>Copart AZ - Phoenix North</option>
-              </optgroup>
-
-              <optgroup label="Copart - California">
-                <option>Copart CA - Antelope</option>
-                <option>Copart CA - Long Beach</option>
-                <option>Copart CA - Sun Valley</option>
-                <option>Copart CA - Van Nuys</option>
-                <option>Copart CA - Vallejo</option>
-                <option>Copart CA - San Jose</option>
-                <option>Copart CA - San Diego</option>
-                <option>Copart CA - Sacramento</option>
-                <option>Copart CA - Rancho Cucamonga</option>
-                <option>Copart CA - Martinez</option>
-                <option>Copart CA - Los Angeles</option>
-                <option>Copart CA - Hayward</option>
-                <option>Copart CA - Fresno</option>
-                <option>Copart CA - San Bernardino</option>
-                <option>Copart CA - Bakersfield</option>
-                <option>Copart CA - Redding</option>
-                <option>Copart CA - Adelanto</option>
-                <option>Copart CA - Mentone</option>
-                <option>Copart CA - So Sacramento</option>
-                <option>Copart CA - Napa</option>
-              </optgroup>
-
-              <optgroup label="Copart - Colorado">
-                <option>Copart CO - Denver</option>
-                <option>Copart CO - Denver South</option>
-                <option>Copart CO - Colorado Springs</option>
-                <option>Copart CO - Denver Central</option>
-              </optgroup>
-
-              <optgroup label="Copart - Connecticut">
-                <option>Copart CT - Hartford Springfield</option>
-                <option>Copart CT - Hartford</option>
-              </optgroup>
-
-              <optgroup label="Copart - Delaware">
-                <option>Copart DE - Seaford</option>
-              </optgroup>
-
-              <optgroup label="Copart - Florida">
-                <option>Copart FL - Orlando North</option>
-                <option>Copart FL - Miami Central</option>
-                <option>Copart FL - West Palm Beach</option>
-                <option>Copart FL - Tampa South</option>
-                <option>Copart FL - Miami North</option>
-                <option>Copart FL - Orlando South</option>
-                <option>Copart FL - Ocala</option>
-                <option>Copart FL - Tallahassee</option>
-                <option>Copart FL - Miami South</option>
-                <option>Copart FL - Ft. Pierce</option>
-                <option>Copart FL - Punta Gorda South</option>
-                <option>Copart FL - Jacksonville North</option>
-              </optgroup>
-
-              <optgroup label="Copart - Georgia">
-                <option>Copart GA - Macon</option>
-                <option>Copart GA - Cartersville</option>
-                <option>Copart GA - Tifton</option>
-                <option>Copart GA - Savannah</option>
-                <option>Copart GA - Atlanta East</option>
-                <option>Copart GA - Atlanta North</option>
-                <option>Copart GA - Atlanta South</option>
-                <option>Copart GA - Atlanta West</option>
-                <option>Copart GA - Fairburn</option>
-                <option>Copart GA - Augusta</option>
-              </optgroup>
-
-              <optgroup label="Copart - Texas">
-                <option>Copart TX - Waco</option>
-                <option>Copart TX - Andrews</option>
-                <option>Copart TX - San Antonio</option>
-                <option>Copart TX - Dallas South</option>
-                <option>Copart TX - Austin</option>
-                <option>Copart TX - McAllen</option>
-                <option>Copart TX - Lufkin</option>
-                <option>Copart TX - Longview</option>
-                <option>Copart TX - Houston</option>
-                <option>Copart TX - Ft. Worth</option>
-                <option>Copart TX - Dallas</option>
-                <option>Copart TX - Corpus Christi</option>
-                <option>Copart TX - El Paso</option>
-                <option>Copart TX - Amarillo</option>
-                <option>Copart TX - Abilene</option>
-                <option>Copart TX - Houston East</option>
-              </optgroup>
-
-              <optgroup label="Copart - New York">
-                <option>Copart NY - Buffalo</option>
-                <option>Copart NY - Newburgh</option>
-                <option>Copart NY - Rochester</option>
-                <option>Copart NY - Syracuse</option>
-                <option>Copart NY - Long Island</option>
-                <option>Copart NY - Albany</option>
-              </optgroup>
-
-              <!-- IAAI LOCATIONS -->
-              <optgroup label="IAAI - Arizona">
-                <option>IAAI Tucson (AZ)</option>
-                <option>IAAI Phoenix (AZ)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - California">
-                <option>IAAI ACE - Carson (CA)</option>
-                <option>IAAI ACE - Perris (CA)</option>
-                <option>IAAI San Diego (CA)</option>
-                <option>IAAI Sacramento (CA)</option>
-                <option>IAAI North Hollywood (CA)</option>
-                <option>IAAI High Desert (CA)</option>
-                <option>IAAI Los Angeles (CA)</option>
-                <option>IAAI Fresno (CA)</option>
-                <option>IAAI Fremont (CA)</option>
-                <option>IAAI Fontana (CA)</option>
-                <option>IAAI Colton (CA)</option>
-                <option>IAAI East Bay (CA)</option>
-                <option>IAAI Anaheim (CA)</option>
-                <option>IAAI Los Angeles South (CA)</option>
-                <option>IAAI Santa Clarita (CA)</option>
-                <option>IAAI Riverside (CA)</option>
-                <option>IAAI Stockton (CA)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - Colorado">
-                <option>IAAI Western Colorado (CO)</option>
-                <option>IAAI Denver East (CO)</option>
-                <option>IAAI Colorado Springs (CO)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - Florida">
-                <option>IAAI Tampa North (FL)</option>
-                <option>IAAI Orlando-North (FL)</option>
-                <option>IAAI Miami-North (FL)</option>
-                <option>IAAI Tampa (FL)</option>
-                <option>IAAI Orlando (FL)</option>
-                <option>IAAI Pensacola (FL)</option>
-                <option>IAAI Jacksonville (FL)</option>
-                <option>IAAI Fort Pierce (FL)</option>
-                <option>IAAI Clearwater (FL)</option>
-                <option>IAAI Fort Myers (FL)</option>
-                <option>IAAI West Palm Beach (FL)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - Georgia">
-                <option>IAAI Macon (GA)</option>
-                <option>IAAI Atlanta East (GA)</option>
-                <option>IAAI Tifton (GA)</option>
-                <option>IAAI Savannah (GA)</option>
-                <option>IAAI Atlanta (GA)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - Illinois">
-                <option>IAAI Chicago-North (IL)</option>
-                <option>IAAI Chicago-South (IL)</option>
-                <option>IAAI Chicago-West (IL)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - Indiana">
-                <option>IAAI Indianapolis (IN)</option>
-                <option>IAAI Fort Wayne (IN)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - New Jersey">
-                <option>IAAI Southern New Jersey (NJ)</option>
-                <option>IAAI Central New Jersey (NJ)</option>
-                <option>IAAI Avenel New Jersey (NJ)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - New York">
-                <option>IAAI Staten Island (NY)</option>
-                <option>IAAI Albany (NY)</option>
-                <option>IAAI Newburgh (NY)</option>
-                <option>IAAI Rochester (NY)</option>
-                <option>IAAI Long Island (NY)</option>
-                <option>IAAI Syracuse (NY)</option>
-                <option>IAAI Buffalo (NY)</option>
-              </optgroup>
-
-              <optgroup label="IAAI - Texas">
-                <option>IAAI Houston South (TX)</option>
-                <option>IAAI Fort Worth North (TX)</option>
-                <option>IAAI Houston-North (TX)</option>
-                <option>IAAI Dallas (TX)</option>
-                <option>IAAI San Antonio-South (TX)</option>
-                <option>IAAI McAllen (TX)</option>
-                <option>IAAI Lubbock (TX)</option>
-                <option>IAAI Longview (TX)</option>
-                <option>IAAI Houston (TX)</option>
-                <option>IAAI El Paso (TX)</option>
-                <option>IAAI Austin (TX)</option>
-                <option>IAAI Amarillo (TX)</option>
-              </optgroup>
+              <option v-for="loc in availableLocations" :key="loc" :value="loc">
+                {{ loc }}
+              </option>
             </select>
           </div>
           
           <div class="form-group">
             <label class="form-label" for="shipping">{{ t('calculator.shipping') }}</label>
-            <input type="number" id="shipping" v-model="values.shipping" class="form-field" placeholder="Auto-calculated" />
+            <input type="number" id="shipping" v-model="values.shipping" class="form-field" placeholder="Auto-calculated" readonly />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="origin">{{ t('calculator.origin') }}</label>
+            <select id="origin" v-model="values.origin" class="form-field">
+              <option value="">{{ t('calculator.select') }}</option>
+              <option value="eaeu">{{ t('calculator.eaeu') }}</option>
+              <option value="noneaeu">{{ t('calculator.noneaeu') }}</option>
+            </select>
           </div>
           
           <div class="form-group">
             <label class="form-label" for="engineType">{{ t('calculator.engineType') }}</label>
             <select id="engineType" v-model="values.engineType" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
-              <option value="gasoline">Gasoline</option>
-              <option value="diesel">Diesel</option>
-              <option value="electric">Electric</option>
+              <option value="gasoline">{{ t('calculator.gasoline') }}</option>
+              <option value="diesel">{{ t('calculator.diesel') }}</option>
+              <option value="electric">{{ t('calculator.electric') }}</option>
             </select>
           </div>
           
@@ -546,9 +430,9 @@ const calculate = () => {
             <label class="form-label" for="age">{{ t('calculator.age') }}</label>
             <select id="age" v-model="values.age" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
-              <option value="under3">Under 3 years</option>
-              <option value="from3to7">3-5 years</option>
-              <option value="over7">Over 5 years</option>
+              <option value="under3">{{ t('calculator.under3') }}</option>
+              <option value="from3to7">{{ t('calculator.from3to7') }}</option>
+              <option value="over7">{{ t('calculator.over7') }}</option>
             </select>
           </div>
           
@@ -570,10 +454,10 @@ const calculate = () => {
             <label class="form-label" for="carType">{{ t('calculator.carType') }}</label>
             <select id="carType" v-model="values.carType" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
-              <option value="sedan">Sedan</option>
-              <option value="suv">SUV</option>
-              <option value="crossover">Crossover</option>
-              <option value="pickup">Pickup</option>
+              <option value="sedan">{{ t('calculator.sedan') }}</option>
+              <option value="suv">{{ t('calculator.suv') }}</option>
+              <option value="crossover">{{ t('calculator.crossover') }}</option>
+              <option value="pickup">{{ t('calculator.pickup') }}</option>
             </select>
           </div>
         </div>
@@ -582,10 +466,10 @@ const calculate = () => {
           {{ t('calculator.calc') }}
         </button>
 
-        <div v-if="result" class="results-card">
+       <!--<div v-if="result" class="results-card">
           <h2 class="results-title">{{ t('calculator.result') }}</h2>
           
-         <!--  <div class="results-breakdown">
+          <div class="results-breakdown">
             <div class="result-item">
               <span class="item-label">{{ t('calculator.carPrice') }}</span>
               <span class="item-value">${{ (parseFloat(values.price) || 0).toFixed(2) }}</span>
@@ -635,8 +519,8 @@ const calculate = () => {
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    <!--</div>
+  </div>-->
 </template>
 
 <style scoped>
@@ -648,8 +532,7 @@ const calculate = () => {
 
 .calculator-wrapper {
   min-height: 100vh;
-   background-image: url('../assets/kk.jpg');
-
+  background-image: url('../assets/kk.jpg');
   padding: 40px 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -717,6 +600,22 @@ const calculate = () => {
   font-size: 1.1rem;
 }
 
+.warning-banner {
+  background-color: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 32px;
+}
+
+.warning-text {
+  color: #92400e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}
+
 .input-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -755,6 +654,11 @@ const calculate = () => {
 
 .form-field:hover {
   border-color: #cbd5e1;
+}
+
+.form-field:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
 }
 
 .calculate-button {
