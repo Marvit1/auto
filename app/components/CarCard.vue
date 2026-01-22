@@ -480,7 +480,7 @@ const getStatusText = (status) => {
 }
 
 .status-auction {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, #f50b0b 0%, #f5320b 100%);
   color: white;
   animation: pulse 2s infinite;
 }
