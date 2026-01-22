@@ -367,11 +367,6 @@ const calculate = () => {
           <p class="calculator-subtitle">{{ t('calculator.subtitle') }}</p>
         </div>
 
-        <div class="warning-banner">
-          <p class="warning-text">
-            ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
-          </p>
-        </div>
         
         <div class="input-grid">
           <div class="form-group">
@@ -398,19 +393,19 @@ const calculate = () => {
             </select>
           </div>
           
-          <div class="form-group">
+        <!-- <div class="form-group">
             <label class="form-label" for="shipping">{{ t('calculator.shipping') }}</label>
             <input type="number" id="shipping" v-model="values.shipping" class="form-field" placeholder="Auto-calculated" readonly />
-          </div>
+          </div>-->
           
-          <div class="form-group">
+         <!-- <div class="form-group">
             <label class="form-label" for="origin">{{ t('calculator.origin') }}</label>
             <select id="origin" v-model="values.origin" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
               <option value="eaeu">{{ t('calculator.eaeu') }}</option>
               <option value="noneaeu">{{ t('calculator.noneaeu') }}</option>
             </select>
-          </div>
+          </div>-->
           
           <div class="form-group">
             <label class="form-label" for="engineType">{{ t('calculator.engineType') }}</label>
@@ -456,7 +451,15 @@ const calculate = () => {
               <option value="pickup">{{ t('calculator.pickup') }}</option>
             </select>
           </div>
+
+          <div class="warning-banner">
+          <p class="warning-text">
+            ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
+          </p>
         </div>
+        </div>
+
+
 
         <button @click="calculate" class="calculate-button">
           {{ t('calculator.calc') }}
@@ -466,42 +469,42 @@ const calculate = () => {
           <h2 class="results-title">{{ t('calculator.result') }}</h2>
           
           <div class="results-breakdown">
-            <div class="result-item">
+            <!--<div class="result-item">
               <span class="item-label">{{ t('calculator.carPrice') }}</span>
               <span class="item-value">${{ (parseFloat(values.price) || 0).toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+           <!-- <div class="result-item">
               <span class="item-label">{{ t('calculator.auctionFee') }}</span>
               <span class="item-value">${{ result.auctionFee.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+           <!-- <div class="result-item">
               <span class="item-label">{{ t('calculator.shippingFee') }}</span>
               <span class="item-value">${{ result.shipping.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+           <!-- <div class="result-item">
               <span class="item-label">{{ t('calculator.insurance') }}</span>
               <span class="item-value">${{ result.insurance.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+           <!-- <div class="result-item">
               <span class="item-label">{{ t('calculator.broker') }}</span>
               <span class="item-value">${{ result.broker.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+            <!--<div class="result-item">
               <span class="item-label">{{ t('calculator.customs') }}</span>
               <span class="item-value">${{ result.customs.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+           <!-- <div class="result-item">
               <span class="item-label">{{ t('calculator.vat') }}</span>
               <span class="item-value">${{ result.vat.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+            <!--<div class="result-item">
               <span class="item-label">{{ t('calculator.ecoTax') }}</span>
               <span class="item-value">${{ result.ecoTax.toFixed(2) }}</span>
-            </div>
-            <div class="result-item">
+            </div>-->
+           <!--<div class="result-item">
               <span class="item-label">{{ t('calculator.brokerService') }}</span>
               <span class="item-value">${{ result.brokerService.toFixed(2) }}</span>
-            </div>
+            </div>-->
           </div>
           
           <div class="total-card">
@@ -509,7 +512,15 @@ const calculate = () => {
               <span class="total-label">{{ t('calculator.total') }}</span>
               <div class="total-values">
                 <div class="total-usd">${{ result.total.toFixed(2) }}</div>
-                <div class="total-amd">{{ result.totalAMD.toLocaleString() }} ֏</div>
+               <!-- <div class="total-amd">{{ result.totalAMD.toLocaleString() }} ֏</div>-->
+
+                <div class="warning-banner">
+          <p class="warning-text">
+            ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
+          </p>
+          <p>⚠️ Using the appropriate calculator on the website, it will only be possible to get a very rough idea of ​​the customs fees to be charged for the import of a given vehicle.</p>
+        </div>
+        
               </div>
             </div>
           </div>
