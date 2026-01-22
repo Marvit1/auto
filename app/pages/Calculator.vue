@@ -466,7 +466,7 @@ const calculate = () => {
           {{ t('calculator.calc') }}
         </button>
 
-       <!--<div v-if="result" class="results-card">
+       <div v-if="result" class="results-card">
           <h2 class="results-title">{{ t('calculator.result') }}</h2>
           
           <div class="results-breakdown">
@@ -519,8 +519,8 @@ const calculate = () => {
           </div>
         </div>
       </div>
-    <!--</div>
-  </div>-->
+    </div>
+  </div>
 </template>
 
 <style scoped>
