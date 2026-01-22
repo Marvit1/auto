@@ -375,7 +375,7 @@ const calculate = () => {
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="auction">{{ t('auctionLabel') }}</label>
+            <label class="form-label" for="auction">{{ t('calculator.auctionLabel') }}</label>
             <select id="auction" v-model="values.auction" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
               <option value="copart">Copart</option>
