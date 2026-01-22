@@ -231,7 +231,7 @@
 import { ref, computed, watch, onMounted, onUnmounted } from "vue"
 import { useRoute } from "vue-router"
 import { useI18n } from "vue-i18n"
-import { useLocalePath, useFetch, useHead, useAsyncData } from "#imports"
+import { useLocalePath, useHead } from "#imports"
 
 const defaultImage = '/aa.jpg'
 const route = useRoute()
@@ -362,27 +362,15 @@ const getStatusText = (status: string): string => {
   }
 }
 
-// ============ FETCH DATA WITH SSR SUPPORT ============
+// ============ FETCH DATA WITH SERVER-SIDE RENDERING ============
 
-const { data: car, pending, error, refresh } = await useAsyncData(
-  `car-${id}-${locale.value}`,
-  async () => {
-    try {
-      const response = await $fetch(
-        `https://autback.onrender.com/api/cars/${id}/`,
-        {
-          query: { lang: locale.value }
-        }
-      )
-      return response
-    } catch (err: any) {
-      console.error('Fetch error:', err)
-      return null
-    }
-  },
+const { data: car, pending, error, refresh } = useFetch(
+  () => `https://autback.onrender.com/api/cars/${id}/`,
   {
-    watch: [locale],
-    server: true
+    query: { lang: locale.value },
+    key: `car-${id}-${locale.value}`,
+    server: true,
+    watch: [locale]
   }
 )
 
@@ -400,13 +388,13 @@ const currentImage = computed(() => {
 })
 
 const carTitle = computed(() => {
-  if (!car.value) return 'AutoSwift'
+  if (!car.value) return 'AutoSwift - ավտոմեքենաների խանութ'
   return `${normalizeValue(car.value.make)} ${normalizeValue(car.value.model)} (${car.value.year})`
 })
 
 const carDescription = computed(() => {
-  if (!car.value) return 'AutoSwift - ավտոմեքենաների խանութ'
-  return `Գինը: $${formatPriceNum(car.value.price)} | Վազքային: ${formatMileageNum(car.value.mileage)} մղ | ${normalizeValue(car.value.fuel)}`
+  if (!car.value) return 'AutoSwift - մեծ ընտրանի ավտոմեքենաներ անվտանգ ներմուծման և վաճառքի ծառայություններով։'
+  return `Գինը: $${formatPriceNum(car.value.price)} | Վազքային: ${formatMileageNum(car.value.mileage)} մղ | ${normalizeValue(car.value.fuel)} | ${normalizeValue(car.value.transmission)}`
 })
 
 const carImage = computed(() => {
@@ -414,8 +402,9 @@ const carImage = computed(() => {
     return `${config.public.baseUrl}${defaultImage}`
   }
   const imgUrl = getImageUrl(car.value.images[0].image)
+  // Ensure absolute URL for Facebook
   if (!imgUrl.startsWith('http')) {
-    return `https://autback.onrender.com${imgUrl}`
+    return `https://autback.onrender.com${imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl}`
   }
   return imgUrl
 })
@@ -424,106 +413,110 @@ const fullUrl = computed(() => {
   return `${config.public.baseUrl}/cars/${id}`
 })
 
-// ============ SET META TAGS ============
+// ============ SET META TAGS FOR FACEBOOK/SEO ============
 
-watch([car, locale], () => {
-  if (!car.value) return
+watch(
+  [car, locale],
+  () => {
+    if (!car.value) return
 
-  useHead({
-    title: carTitle.value,
-    link: [
-      {
-        rel: 'canonical',
-        href: fullUrl.value
-      }
-    ],
-    meta: [
-      {
-        name: 'description',
-        content: carDescription.value
-      },
-      {
-        name: 'keywords',
-        content: `${normalizeValue(car.value.make)}, ${normalizeValue(car.value.model)}, ${car.value.year}, ավտոմեքենա`
-      },
-      // ✅ FACEBOOK / OPEN GRAPH
-      {
-        property: 'og:type',
-        content: 'website'
-      },
-      {
-        property: 'og:title',
-        content: carTitle.value
-      },
-      {
-        property: 'og:description',
-        content: carDescription.value
-      },
-      {
-        property: 'og:image',
-        content: carImage.value
-      },
-      {
-        property: 'og:image:width',
-        content: '1200'
-      },
-      {
-        property: 'og:image:height',
-        content: '630'
-      },
-      {
-        property: 'og:image:type',
-        content: 'image/jpeg'
-      },
-      {
-        property: 'og:image:alt',
-        content: carTitle.value
-      },
-      {
-        property: 'og:url',
-        content: fullUrl.value
-      },
-      {
-        property: 'og:site_name',
-        content: 'AutoSwift'
-      },
-      {
-        property: 'og:locale',
-        content: 'hy_AM'
-      },
-      // ✅ PRODUCT
-      {
-        property: 'product:price:amount',
-        content: formatPriceNum(car.value.price)
-      },
-      {
-        property: 'product:price:currency',
-        content: 'USD'
-      },
-      {
-        property: 'product:availability',
-        content: car.value.status === 'armenia' ? 'in stock' : 'out of stock'
-      },
-      // ✅ TWITTER
-      {
-        name: 'twitter:card',
-        content: 'summary_large_image'
-      },
-      {
-        name: 'twitter:title',
-        content: carTitle.value
-      },
-      {
-        name: 'twitter:description',
-        content: carDescription.value
-      },
-      {
-        name: 'twitter:image',
-        content: carImage.value
-      }
-    ]
-  })
-}, { immediate: true })
+    useHead({
+      title: carTitle.value,
+      link: [
+        {
+          rel: 'canonical',
+          href: fullUrl.value
+        }
+      ],
+      meta: [
+        {
+          name: 'description',
+          content: carDescription.value
+        },
+        {
+          name: 'keywords',
+          content: `${normalizeValue(car.value.make)}, ${normalizeValue(car.value.model)}, ${car.value.year}, ավտոմեքենա, վաճառք`
+        },
+        // ✅ FACEBOOK / OPEN GRAPH
+        {
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          property: 'og:title',
+          content: carTitle.value
+        },
+        {
+          property: 'og:description',
+          content: carDescription.value
+        },
+        {
+          property: 'og:image',
+          content: carImage.value
+        },
+        {
+          property: 'og:image:width',
+          content: '1200'
+        },
+        {
+          property: 'og:image:height',
+          content: '630'
+        },
+        {
+          property: 'og:image:type',
+          content: 'image/jpeg'
+        },
+        {
+          property: 'og:image:alt',
+          content: carTitle.value
+        },
+        {
+          property: 'og:url',
+          content: fullUrl.value
+        },
+        {
+          property: 'og:site_name',
+          content: 'AutoSwift'
+        },
+        {
+          property: 'og:locale',
+          content: 'hy_AM'
+        },
+        // ✅ PRODUCT SCHEMA
+        {
+          property: 'product:price:amount',
+          content: formatPriceNum(car.value.price)
+        },
+        {
+          property: 'product:price:currency',
+          content: 'USD'
+        },
+        {
+          property: 'product:availability',
+          content: car.value.status === 'armenia' ? 'in stock' : 'out of stock'
+        },
+        // ✅ TWITTER CARD
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:title',
+          content: carTitle.value
+        },
+        {
+          name: 'twitter:description',
+          content: carDescription.value
+        },
+        {
+          name: 'twitter:image',
+          content: carImage.value
+        }
+      ]
+    })
+  },
+  { immediate: true, deep: true }
+)
 
 // ============ IMAGE NAVIGATION ============
 
