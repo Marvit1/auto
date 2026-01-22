@@ -332,7 +332,7 @@ const calculate = () => {
   const vatBase = price + shipping + insurance + customs + ecoTax;
   const vat = vatBase * 0.20;
   
-  const total = price + auctionFee + shipping + insurance + broker + customs + vat + ecoTax + brokerService + 950;
+  const total = price + auctionFee + shipping + insurance + broker + customs + vat + ecoTax + brokerService + 1050;
   const totalAMD = total * 400;
   
   result.value = {
@@ -437,7 +437,10 @@ const calculate = () => {
               <option value="2500">2.5L (2500cc)</option>
               <option value="3000">3.0L (3000cc)</option>
               <option value="3500">3.5L (3500cc)</option>
+              <option value="4000">4.0L (4000cc)</option>
+              <option value="4500">4.5L (4500cc)</option>
               <option value="5000">5.0L (5000cc)</option>
+              <option value="6000">6.0L (6000cc)</option>
             </select>
           </div>
           
