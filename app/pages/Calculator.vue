@@ -366,15 +366,7 @@ const calculate = () => {
           <h1 class="calculator-title">{{ t('calculator.title') }}</h1>
           <p class="calculator-subtitle">{{ t('calculator.subtitle') }}</p>
         </div>
-
-        
-        <div class="input-grid">
-          <div class="form-group">
-            <label class="form-label" for="price">{{ t('calculator.priceLabel') }}</label>
-            <input type="number" id="price" v-model="values.price" class="form-field" placeholder="2500" />
-          </div>
-          
-          <div class="form-group">
+ <div class="form-group">
             <label class="form-label" for="auction">{{ t('calculator.auctionLabel') }}</label>
             <select id="auction" v-model="values.auction" class="form-field">
               <option value="">{{ t('calculator.select') }}</option>
@@ -382,6 +374,14 @@ const calculate = () => {
               <option value="iaai">IAAI</option>
             </select>
           </div>
+        
+        <div class="input-grid">
+          <div class="form-group">
+            <label class="form-label" for="price">{{ t('calculator.priceLabel') }}</label>
+            <input type="number" id="price" v-model="values.price" class="form-field" placeholder="2500" />
+          </div>
+          
+          
           
           <div class="form-group">
             <label class="form-label" for="auctionLocation">{{ t('calculator.auctionLocation') }}</label>
