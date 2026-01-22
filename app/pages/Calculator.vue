@@ -569,7 +569,7 @@ const calculate = () => {
    CARD
 ========================= */
 .calculator-card {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
