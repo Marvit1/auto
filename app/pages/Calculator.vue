@@ -452,11 +452,7 @@ const calculate = () => {
             </select>
           </div>
 
-          <div class="warning-banner">
-          <p class="warning-text">
-            ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
-          </p>
-        </div>
+          
         </div>
 
 
@@ -514,15 +510,16 @@ const calculate = () => {
                 <div class="total-usd">${{ result.total.toFixed(2) }}</div>
                <!-- <div class="total-amd">{{ result.totalAMD.toLocaleString() }} ֏</div>-->
 
-                <div class="warning-banner">
+              
+        
+              </div>
+            </div>
+              <div class="warning-banner">
           <p class="warning-text">
             ⚠️ Կայքում համապատասխան հաշվիչի միջոցով հնարավոր կլինի միայն խիստ մոտավոր պատկերացում կազմել տվյալ տրանսպորտային միջոցի ներմուծման համար գանձման ենթակա մաքսային վճարների վերաբերյալ։
           </p>
           <p>⚠️ Using the appropriate calculator on the website, it will only be possible to get a very rough idea of ​​the customs fees to be charged for the import of a given vehicle.</p>
         </div>
-        
-              </div>
-            </div>
           </div>
         </div>
       </div>
