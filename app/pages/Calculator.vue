@@ -539,12 +539,20 @@ const calculate = () => {
 </template>
 
 <style scoped>
+/* =========================
+   GLOBAL SAFETY
+========================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
+/* =========================
+   WRAPPER
+========================= */
 .calculator-wrapper {
   min-height: 100vh;
   background-image: url('../assets/kk.jpg');
@@ -557,6 +565,9 @@ const calculate = () => {
   margin: 0 auto;
 }
 
+/* =========================
+   CARD
+========================= */
 .calculator-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -577,6 +588,9 @@ const calculate = () => {
   }
 }
 
+/* =========================
+   HEADER
+========================= */
 .header-section {
   text-align: center;
   margin-bottom: 40px;
@@ -615,6 +629,9 @@ const calculate = () => {
   font-size: 1.1rem;
 }
 
+/* =========================
+   WARNING
+========================= */
 .warning-banner {
   background-color: #fef3c7;
   border-left: 4px solid #f59e0b;
@@ -632,6 +649,9 @@ const calculate = () => {
   font-weight: 500;
 }
 
+/* =========================
+   INPUTS
+========================= */
 .input-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -677,6 +697,9 @@ const calculate = () => {
   cursor: not-allowed;
 }
 
+/* =========================
+   BUTTON
+========================= */
 .calculate-button {
   width: 100%;
   padding: 18px 32px;
@@ -698,6 +721,9 @@ const calculate = () => {
   box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
 }
 
+/* =========================
+   RESULTS
+========================= */
 .results-card {
   margin-top: 40px;
   padding: 32px;
@@ -732,16 +758,22 @@ const calculate = () => {
   margin-bottom: 24px;
 }
 
+/* 🔥 FIX FLEX OVERFLOW */
 .result-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
   border-bottom: 1px solid #f3f4f6;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.result-item:last-child {
-  border-bottom: none;
+.item-label,
+.item-value {
+  max-width: 100%;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .item-label {
@@ -755,6 +787,9 @@ const calculate = () => {
   color: #1f2937;
 }
 
+/* =========================
+   TOTAL
+========================= */
 .total-card {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 16px;
@@ -766,6 +801,8 @@ const calculate = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .total-label {
@@ -778,13 +815,21 @@ const calculate = () => {
 
 .total-values {
   text-align: right;
+  max-width: 100%;
+}
+
+.total-usd,
+.total-amd {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.2;
 }
 
 .total-usd {
   font-size: 2rem;
   font-weight: 900;
   color: white;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .total-amd {
@@ -794,21 +839,36 @@ const calculate = () => {
   margin-top: 8px;
 }
 
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 768px) {
   .calculator-card {
     padding: 24px;
   }
-  
+
   .calculator-title {
     font-size: 1.8rem;
   }
-  
+
   .input-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .total-usd {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .total-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .total-values {
+    text-align: left;
+    width: 100%;
   }
 }
 </style>
