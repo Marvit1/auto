@@ -148,6 +148,7 @@
     "subtitle": "Estimate the full import cost",
     "select": "Select",
     "priceLabel": "Auction price ($)",
+    "auctionLabel": "Auction",
     "auction": "Auction",
     "auctionLocation": "Auction location (state)",
     "shipping": "Shipping to Gyumri ($)",
