@@ -231,9 +231,10 @@
 import { ref, computed, watch, onMounted, onUnmounted } from "vue"
 import { useRoute } from "vue-router"
 import { useI18n } from "vue-i18n"
-import { useLocalePath, useHead } from "#imports"
+import { useLocalePath, useHead, useSeoMeta, useRuntimeConfig, useFetch } from "#imports"
 
-const defaultImage = '/aa.jpg'
+// 1. Սկզբնական արժեքներ
+const defaultImage = 'https://www.autoswift.shop/images/logs.jpg'
 const route = useRoute()
 const id = route.params.id as string
 const i18nAll = useI18n({ useScope: 'global' })
@@ -245,8 +246,18 @@ const config = useRuntimeConfig()
 const currentImageIndex = ref(0)
 const lightboxOpen = ref(false)
 
-// ============ HELPER FUNCTIONS ============
+// 2. FETCH DATA (Կարևոր է SSR-ի համար՝ await-ով)
+const { data: car, pending, error, refresh } = await useFetch<any>(
+  () => `https://autback.onrender.com/api/cars/${id}/`,
+  {
+    query: { lang: locale.value },
+    key: `car-detail-${id}-${locale.value}`,
+    server: true,
+    watch: [locale]
+  }
+)
 
+// 3. ՁԵՐ ԲՈԼՈՐ ՀԵԼՓԵՐՆԵՐԸ (ԱՆՓՈՓՈԽ)
 const extractText = (v: any, lang: string): string => {
   if (v === null || v === undefined) return ''
   if (typeof v === 'string') return v
@@ -283,16 +294,21 @@ const normalizeValue = (v: any): string => {
 
 const getImageUrl = (img: any): string => {
   if (!img) return defaultImage
+  let path = ''
   if (typeof img === 'string') {
-    if (img.startsWith('/media/') || img.startsWith('media/')) {
-      return `https://autback.onrender.com${img.startsWith('/') ? img : '/' + img}`
-    }
-    return img
+    path = img
+  } else if (img.url) {
+    path = img.url
+  } else if (img.src) {
+    path = img.src
+  } else if (img.image) {
+    return getImageUrl(img.image)
   }
-  if (img.url) return img.url
-  if (img.src) return img.src
-  if (img.image) return getImageUrl(img.image)
-  return defaultImage
+
+  if (!path) return defaultImage
+  if (path.startsWith('http')) return path
+  const cleanPath = path.startsWith('/') ? path : '/' + path
+  return `https://autback.onrender.com${cleanPath}`
 }
 
 const formatPrice = (price: number): string => {
@@ -323,22 +339,10 @@ const formatMileageNum = (mileage: number): string => {
 const getColorHex = (colorName: any): string => {
   if (!colorName) return '#667eea'
   const colorMap: Record<string, string> = {
-    'սև': '#1a1a1a',
-    'սպիտակ': '#f5f5f5',
-    'կարմիր': '#e53e3e',
-    'կապույտ': '#3182ce',
-    'մոխրագույն': '#718096',
-    'արծաղ': '#cbd5e0',
-    'կանաչ': '#38a169',
-    'դեղին': '#ecc94b',
-    'black': '#1a1a1a',
-    'white': '#f5f5f5',
-    'red': '#e53e3e',
-    'blue': '#3182ce',
-    'gray': '#718096',
-    'silver': '#cbd5e0',
-    'green': '#38a169',
-    'yellow': '#ecc94b'
+    'սև': '#1a1a1a', 'սպիտակ': '#f5f5f5', 'կարմիր': '#e53e3e', 'կապույտ': '#3182ce',
+    'մոխրագույն': '#718096', 'արծաղ': '#cbd5e0', 'կանաչ': '#38a169', 'դեղին': '#ecc94b',
+    'black': '#1a1a1a', 'white': '#f5f5f5', 'red': '#e53e3e', 'blue': '#3182ce',
+    'gray': '#718096', 'silver': '#cbd5e0', 'green': '#38a169', 'yellow': '#ecc94b'
   }
   const normalized = normalizeValue(colorName)
   return colorMap[normalized?.toLowerCase()] || '#667eea'
@@ -362,163 +366,49 @@ const getStatusText = (status: string): string => {
   }
 }
 
-// ============ FETCH DATA WITH SERVER-SIDE RENDERING ============
-
-const { data: car, pending, error, refresh } = useFetch(
-  () => `https://autback.onrender.com/api/cars/${id}/`,
-  {
-    query: { lang: locale.value },
-    key: `car-${id}-${locale.value}`,
-    server: true,
-    watch: [locale]
-  }
-)
-
-// ============ COMPUTED PROPERTIES ============
-
-const hasMultipleImages = computed(() => {
-  return car.value?.images && car.value.images.length > 1
-})
-
-const currentImage = computed(() => {
-  if (!car.value?.images || car.value.images.length === 0) {
-    return defaultImage
-  }
-  return getImageUrl(car.value.images[currentImageIndex.value]?.image)
-})
-
+// 4. COMPUTED SEO PROPERTIES
 const carTitle = computed(() => {
   if (!car.value) return 'AutoSwift - ավտոմեքենաների խանութ'
   return `${normalizeValue(car.value.make)} ${normalizeValue(car.value.model)} (${car.value.year})`
 })
 
 const carDescription = computed(() => {
-  if (!car.value) return 'AutoSwift - մեծ ընտրանի ավտոմեքենաներ անվտանգ ներմուծման և վաճառքի ծառայություններով։'
-  return `Գինը: $${formatPriceNum(car.value.price)} | Վազքային: ${formatMileageNum(car.value.mileage)} մղ | ${normalizeValue(car.value.fuel)} | ${normalizeValue(car.value.transmission)}`
+  if (!car.value) return 'AutoSwift – մեծ ընտրանի ավտոմեքենաներ անվտանգ ներմուծման և վաճառքի ծառայություններով։'
+  return `Գինը: $${formatPriceNum(car.value.price)} | Վազք: ${formatMileageNum(car.value.mileage)} մղ | ${normalizeValue(car.value.fuel)} | ${normalizeValue(car.value.transmission)}`
 })
 
 const carImage = computed(() => {
-  if (!car.value?.images || car.value.images.length === 0) {
-    return `${config.public.baseUrl}${defaultImage}`
+  if (car.value?.images && car.value.images.length > 0) {
+    return getImageUrl(car.value.images[0].image)
   }
-  const imgUrl = getImageUrl(car.value.images[0].image)
-  // Ensure absolute URL for Facebook
-  if (!imgUrl.startsWith('http')) {
-    return `https://autback.onrender.com${imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl}`
-  }
-  return imgUrl
+  return defaultImage
 })
 
-const fullUrl = computed(() => {
-  return `${config.public.baseUrl}/cars/${id}`
+// 5. SEO META TAGS (SSR FRIENDLY)
+useSeoMeta({
+  title: carTitle,
+  ogTitle: carTitle,
+  description: carDescription,
+  ogDescription: carDescription,
+  ogImage: carImage,
+  ogImageSecureUrl: carImage,
+  ogImageType: 'image/jpeg',
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogUrl: () => `${config.public.baseUrl}${route.fullPath}`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: carTitle,
+  twitterDescription: carDescription,
+  twitterImage: carImage,
 })
 
-// ============ SET META TAGS FOR FACEBOOK/SEO ============
+// 6. IMAGE NAVIGATION & ACTIONS
+const hasMultipleImages = computed(() => car.value?.images && car.value.images.length > 1)
 
-watch(
-  [car, locale],
-  () => {
-    if (!car.value) return
-
-    useHead({
-      title: carTitle.value,
-      link: [
-        {
-          rel: 'canonical',
-          href: fullUrl.value
-        }
-      ],
-      meta: [
-        {
-          name: 'description',
-          content: carDescription.value
-        },
-        {
-          name: 'keywords',
-          content: `${normalizeValue(car.value.make)}, ${normalizeValue(car.value.model)}, ${car.value.year}, ավտոմեքենա, վաճառք`
-        },
-        // ✅ FACEBOOK / OPEN GRAPH
-        {
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          property: 'og:title',
-          content: carTitle.value
-        },
-        {
-          property: 'og:description',
-          content: carDescription.value
-        },
-        {
-          property: 'og:image',
-          content: carImage.value
-        },
-        {
-          property: 'og:image:width',
-          content: '1200'
-        },
-        {
-          property: 'og:image:height',
-          content: '630'
-        },
-        {
-          property: 'og:image:type',
-          content: 'image/jpeg'
-        },
-        {
-          property: 'og:image:alt',
-          content: carTitle.value
-        },
-        {
-          property: 'og:url',
-          content: fullUrl.value
-        },
-        {
-          property: 'og:site_name',
-          content: 'AutoSwift'
-        },
-        {
-          property: 'og:locale',
-          content: 'hy_AM'
-        },
-        // ✅ PRODUCT SCHEMA
-        {
-          property: 'product:price:amount',
-          content: formatPriceNum(car.value.price)
-        },
-        {
-          property: 'product:price:currency',
-          content: 'USD'
-        },
-        {
-          property: 'product:availability',
-          content: car.value.status === 'armenia' ? 'in stock' : 'out of stock'
-        },
-        // ✅ TWITTER CARD
-        {
-          name: 'twitter:card',
-          content: 'summary_large_image'
-        },
-        {
-          name: 'twitter:title',
-          content: carTitle.value
-        },
-        {
-          name: 'twitter:description',
-          content: carDescription.value
-        },
-        {
-          name: 'twitter:image',
-          content: carImage.value
-        }
-      ]
-    })
-  },
-  { immediate: true, deep: true }
-)
-
-// ============ IMAGE NAVIGATION ============
+const currentImage = computed(() => {
+  if (!car.value?.images || car.value.images.length === 0) return defaultImage
+  return getImageUrl(car.value.images[currentImageIndex.value]?.image)
+})
 
 const nextImage = () => {
   if (!hasMultipleImages.value) return
@@ -530,69 +420,30 @@ const prevImage = () => {
   currentImageIndex.value = (currentImageIndex.value - 1 + car.value.images.length) % car.value.images.length
 }
 
-const openLightbox = () => {
-  if (hasMultipleImages.value) {
-    lightboxOpen.value = true
-  }
-}
-
-const closeLightbox = () => {
-  lightboxOpen.value = false
-}
-
-// ============ ACTIONS ============
+const openLightbox = () => { if (hasMultipleImages.value) lightboxOpen.value = true }
+const closeLightbox = () => { lightboxOpen.value = false }
 
 const shareProduct = () => {
   if (navigator.share && car.value) {
     navigator.share({
       title: carTitle.value,
-      text: `Check out this car: ${carTitle.value}`,
       url: window.location.href
     }).catch(err => console.log('Error sharing:', err))
   }
 }
 
-const contactSeller = () => {
-  console.log('Contact seller')
-}
-
-const makeOffer = () => {
-  console.log('Make offer')
-}
-
-// ============ KEYBOARD NAVIGATION ============
+const contactSeller = () => console.log('Contact seller')
+const makeOffer = () => console.log('Make offer')
 
 const handleKeyDown = (event: KeyboardEvent) => {
   if (!car.value?.images || car.value.images.length <= 1) return
-
-  switch(event.key) {
-    case 'ArrowRight':
-    case 'd':
-    case 'D':
-      event.preventDefault()
-      nextImage()
-      break
-    case 'ArrowLeft':
-    case 'a':
-    case 'A':
-      event.preventDefault()
-      prevImage()
-      break
-    case 'Escape':
-      if (lightboxOpen.value) {
-        closeLightbox()
-      }
-      break
-  }
+  if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D') nextImage()
+  if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A') prevImage()
+  if (event.key === 'Escape' && lightboxOpen.value) closeLightbox()
 }
 
-onMounted(() => {
-  window.addEventListener('keydown', handleKeyDown)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeyDown)
-})
+onMounted(() => { window.addEventListener('keydown', handleKeyDown) })
+onUnmounted(() => { window.removeEventListener('keydown', handleKeyDown) })
 </script>
 
 <style scoped>
