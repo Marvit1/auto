@@ -116,7 +116,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: 'https://www.autoswift.shop/images/og-image.jpg'
+          content: 'https://www.autoswift.shop/images/logs.jpg'
         },
         {
           property: 'og:image:width',
@@ -154,7 +154,7 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:image',
-          content: 'https://www.autoswift.shop/images/og-image.jpg'
+          content: 'https://www.autoswift.shop/images/logs.jpg'
         },
 
         // ✅ MOBILE & APP
