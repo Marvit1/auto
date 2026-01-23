@@ -43,7 +43,7 @@ export default defineNuxtConfig({
       titleTemplate: '%s · AutoSwift',
       
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, // Ստանդարտ favicon
+        { rel: 'icon', type: 'image/x-icon', href: '/images/logs.jpg' }, // Ստանդարտ favicon
         { rel: 'apple-touch-icon', href: '/aa.jpg' }, // iOS-ի համար
         { rel: 'canonical', href: 'https://www.autoswift.shop' },
         { rel: 'preconnect', href: 'https://autback.onrender.com' }
