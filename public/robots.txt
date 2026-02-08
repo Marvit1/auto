@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow:
+
+# Sitemap reference for crawlers
+Sitemap: http://localhost:3000/sitemap.xml

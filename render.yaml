@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: autoweb
+    env: node
+    region: frankfurt # Կամ oregon, singapore
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node .output/server/index.mjs
+    
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: BASE_URL
+        sync: false
+      - key: SITE_NAME
+        value: AutoWeb
+      
+    # Ավտոմատ deployment GitHub-ից
+    autoDeploy: true
