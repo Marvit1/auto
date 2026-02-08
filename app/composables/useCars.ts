@@ -100,7 +100,7 @@ export const useCars = () => {
     
     try {
       const response = await $fetch<Car[]>(
-        'https://api.autoswift.shop/admin/cars/',
+        'https://api.autoswift.shop/api/cars/',
         {
           query: { lang: locale.value || 'hy' },
           timeout: 30000 // 30 second timeout
